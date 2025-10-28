@@ -4,5 +4,9 @@
   },
     "header": {
         "welcome": "Добро пожаловать на Party Pulse Portal"
-    }
+    },
+     "auth": {
+        "login": "Войти",
+        "signup": "Регистрация"
+  }
 }

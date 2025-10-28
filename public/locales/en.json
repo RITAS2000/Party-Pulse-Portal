@@ -4,5 +4,9 @@
     },
     "header":{
         "welcome": "Welcome to Party Pulse Portal"
-    }
+    },
+    "auth": {
+        "login": "Login",
+        "signup": "Sign up"
+  }
 }
