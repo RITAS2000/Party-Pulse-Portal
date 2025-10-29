@@ -6,7 +6,8 @@ import { I18nextProvider } from 'react-i18next';
 import i18n from "../i18n";
 import ReModalContainer from "./components/modalContainer";
 import { ReduxProvider } from "./components/reduxProvider";
-const isAdmin = false
+import { ToastContainer } from 'react-toastify';
+
 
 
 
@@ -24,10 +25,11 @@ export default function RootLayout({ children }: Props) {
       <body>
          
          <I18nextProvider i18n={i18n}>
-          <Sidebar isAdmin={isAdmin} />
+          <Sidebar/>
           <ReduxProvider>
           {children}
             <ReModalContainer />
+            <ToastContainer position="bottom-center" autoClose={3000} hideProgressBar={false} newestOnTop={false} rtl={false} pauseOnFocusLoss draggable={false} pauseOnHover theme="dark"/>
           </ReduxProvider>
           </I18nextProvider>
          

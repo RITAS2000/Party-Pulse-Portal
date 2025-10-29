@@ -23,9 +23,9 @@ export default function ReUseModal({ children }: ReUseModalProps) {
   const handleModalClick = (event: React.MouseEvent<HTMLDivElement>) => {event.stopPropagation();};
 
     return( <div className="fixed inset-0 flex items-center justify-center w-full h-full bg-gray-500/50  " onClick={handleBackdropClick}>
-      <div className=" relative w-auto h-auto px-12 py-16 border-solid border-2 border-red-800 rounded-lg bg-[url(/modal.jpg)]" onClick={handleModalClick}>
+      <div className=" relative w-auto h-auto px-24 py-16 border-solid border-2 border-red-800 drop-shadow-[0_0_6px_white] rounded-lg bg-[url(/modal.jpg)] bg-no-repeat bg-center bg-cover" onClick={handleModalClick}>
         <button onClick={handleClose} className="w-6 h-6 rounded-full flex items-center justify-center absolute top-2 right-2 hover:bg-gray-200/70 transition-all duration-300">
-        <MdClose size={30} />
+        <MdClose size={30} color="white"/>
         </button>
         {children}
       </div>

@@ -8,5 +8,31 @@
     "auth": {
         "login": "Login",
         "signup": "Sign up"
+  },
+  "yup":{
+        "minName": "Name must be at least 3 characters",
+        "maxName": "Name must be at most 16 characters",
+        "requiredName": "Name is required",
+        "invalidEmail": "Invalid email address",
+        "maxEmail": "Email must be at most 128 characters",
+        "requiredEmail": "Email is required",
+        "minPassword": "Password must be at least 8 characters",
+        "maxPassword": "Password must be at most 64 characters",
+        "requiredPassword": "Password is required",
+        "passwordMatches": "Passwords must match",
+        "requiredConfirmPassword": "Confirm password is required",
+        "invalidEmailFormat": "Email format is invalid"
+  },
+  "form": {
+        "text": "Fill out the form to join the Party Pulse Portal and be able to participate in the GVG activity",
+        "spanName": "Name",
+        "spanEmail": "Email",   
+        "spanPassword": "Password",
+        "spanConfirmPassword": "Confirm Password",
+        "button": "Register" 
+  },
+  "toast": {
+    "registrationSuccess": "Registration successful!",
+    "registrationError": "Something went wrong during registration."
   }
 }

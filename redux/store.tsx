@@ -1,5 +1,6 @@
 import { configureStore } from '@reduxjs/toolkit';
 import modalReducer from './modals/slice';
+import authReducer from './auth/slice';
 import {
   FLUSH,
   REHYDRATE,
@@ -11,6 +12,7 @@ import {
 export const store = configureStore({
   reducer: {
     modal: modalReducer,
+    auth: authReducer,
   },
   middleware: getDefaultMiddleware =>
     getDefaultMiddleware({
@@ -19,3 +21,6 @@ export const store = configureStore({
       },
     }),
 });
+
+export type RootState = ReturnType<typeof store.getState>;
+export type AppDispatch = typeof store.dispatch;
