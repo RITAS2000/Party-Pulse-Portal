@@ -23,3 +23,24 @@ export const registerUser = createAsyncThunk(
     }
   }
 );
+
+export const loginUser = createAsyncThunk(
+  'auth/loginUser',
+  async (formData: {email: string; password: string }, thunkAPI) => {
+    try {
+      const response = await axios.post('/party/auth/login', formData,  {
+  headers: {
+    'Content-Type': 'application/json'
+  }
+});
+      console.log('📦 Дані з сервера:', response.data);
+      return response.data;
+    } catch (error: unknown) {
+       if (axios.isAxiosError(error)) {
+        return thunkAPI.rejectWithValue(error.message || 'Login error');
+      }
+      console.error('❌ Інша помилка:', error);
+      return thunkAPI.rejectWithValue('Login error');
+    }
+  }
+);

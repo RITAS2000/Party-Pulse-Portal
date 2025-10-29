@@ -24,15 +24,23 @@
         "invalidEmailFormat": "Email format is invalid"
   },
   "form": {
-        "text": "Fill out the form to join the Party Pulse Portal and be able to participate in the GVG activity",
+        "textRegister": "Fill out the form to join the Party Pulse Portal and be able to participate in the GVG activity",
+        "textLogin": "Now log in to the portal to add your game character and start joining in clan GVGs", 
         "spanName": "Name",
         "spanEmail": "Email",   
         "spanPassword": "Password",
         "spanConfirmPassword": "Confirm Password",
-        "button": "Register" 
+        "buttonRegister": "Register",
+        "buttonLogin": "Login",
+        "pathOne": "If you are not registered yet, please ",
+        "pathTwo": "Sign up",
+        "pathThree": "If you already have an account, please ",
+        "pathFour": "Login"
   },
   "toast": {
     "registrationSuccess": "Registration successful!",
-    "registrationError": "Something went wrong during registration."
+    "registrationError": "Something went wrong during registration.",
+    "loginSuccess": "Login successful!",
+    "loginError": "Something went wrong during login."
   }
 }

@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { registerUser } from './operation';
+import { loginUser, registerUser } from './operation';
 
 interface AuthState {
   userData: null | {
@@ -12,12 +12,18 @@ interface AuthState {
   loading: boolean;
   error: string | null;
   isRegistered: boolean;
+  accessToken: string | null;
+  expiresIn: number | null;
 }
 const initialState: AuthState = {
   userData: null,
   loading: false,
   error: null,
   isRegistered: false,
+  accessToken: null,
+  expiresIn: null
+   
+   
 };
 const authSlice = createSlice({
   name: 'auth',
@@ -37,9 +43,21 @@ const authSlice = createSlice({
       .addCase(registerUser.rejected, (state, action) => {
         state.loading = false;
         state.error = action.payload as string;
+      })
+     .addCase(loginUser.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(loginUser.fulfilled, (state, action) => {
+        state.loading = false;
+        state.accessToken = action.payload.accessToken;
+        state.expiresIn = Date.now() + action.payload.expiresIn;
+      })
+      .addCase(loginUser.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload as string;
       });
   },
 });
 
-// export const { setRegistared } = authSlice.actions;
 export default authSlice.reducer;

@@ -12,6 +12,7 @@ import { AiOutlineEye, AiOutlineEyeInvisible } from 'react-icons/ai';
 import { useDispatch } from 'react-redux';
 import { registerUser } from '../../redux/auth/operation';
 import type { AppDispatch } from '../../redux/store';
+import { closeModal, openModal } from '@/redux/modals/slice';
 <FiUser />
 
 
@@ -34,7 +35,7 @@ export default function RegistarForm() {
 
   password: Yup.string()
     .min(8, t('yup.minPassword'))
-    .max(128, t('yup.maxPassword'))
+    .max(64, t('yup.maxPassword'))
     .required(t('yup.requiredPassword')),
 
   confirm: Yup.string()
@@ -50,6 +51,12 @@ export default function RegistarForm() {
     password: '',
     confirm: '',
     };
+     const hendleLogin = () => {
+            dispatch(closeModal());
+             dispatch(openModal({ type: 'login' }));
+    
+         }
+        
     const handleSubmit = async (formData: { username: string; email: string; password: string }) => {
        const { username, email, password } = formData;
     const resultAction = await dispatch(registerUser({ username, email, password }));
@@ -65,7 +72,7 @@ export default function RegistarForm() {
     }
   };
 
-    return (
+    return (<div className='flex flex-col gap-10'>
         <Formik
             initialValues={initialValues}
             onSubmit={handleSubmit}
@@ -77,7 +84,7 @@ export default function RegistarForm() {
             <Form className="w-[420px] flex flex-col gap-6">
                 <div>
                 <h2 className='font-serif text-3xl font-bold  text-red-800'>{t("auth.signup")}</h2>
-                    <p className='text-white font-sans'>{t("form.text")}</p>
+                    <p className='text-white font-sans'>{t("form.textRegister")}</p>
                     </div>
                 <label className="relative mb-4">
                     <span className='text-white font-sans font-bold text-xl'>{t("form.spanName")}</span>
@@ -145,9 +152,14 @@ export default function RegistarForm() {
                   </button>
                     <ErrorMessage name="confirm" component="span" className="absolute text-xs left-0 -bottom-3 text-gray-800 font-bold" />
                 </label>
-                <Button type="submit">{t("form.button") }</Button>
+                <Button type="submit">{t("form.buttonRegister") }</Button>
         </Form>
         </Formik>
+         <div className='flex gap-2 justify-center'>
+            <p className='text-white'>{t("form.pathThree")}</p>
+                <button type="button" onClick={hendleLogin} className="font-bold  text-red-800 underline hover:text-white transition-all duration-300">{t("form.pathFour")}</button>
+        </div>
+        </div>
     )
 
 }
