@@ -1,30 +1,36 @@
 "use client";
-import { openModal } from "@/redux/modals/slice";
 import Image from "next/image";
 import React from "react";
 import { useTranslation } from 'react-i18next';
 import { IoExitOutline } from "react-icons/io5";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { selectIsLoggedIn } from "../../redux/auth/selectors"
+import { logout } from "../../redux/auth/operation";
+import { AppDispatch } from "../../redux/store";
+import Link from "next/link";
+
 
 export interface HeaderProps {
     onClick?: () => void;
 } 
 
 
-export default function Header( {}: HeaderProps) {
-     const dispatch = useDispatch();
-    const handleOpenModalRegister = () => dispatch(openModal({ type: 'register' }));
-    const handleOpenModalLogin = () => dispatch(openModal({ type: 'login' }));
+export default function Header({ }: HeaderProps) {
+   
+    const isLoggedIn = useSelector(selectIsLoggedIn)
+    const dispatch = useDispatch<AppDispatch>();
+    const hanleLogout =() => dispatch(logout());
+        
      const { t } = useTranslation();
     return (
-        <header className="w-full h-40 bg-[linear-gradient(to_left,rgba(220,38,38,1),rgba(220,38,38,0)),url('/header.jpg')] bg-cover bg-center flex items-center justify-between pr-10 py-4 shadow-lg">
-            <div className="ml-80 pl-20 pr-6 text-white font-serif text-5xl"><h1>{t("header.welcome")}</h1></div>
-            <Image src="/PW.png" alt="logo PW" width={140} height={130} />
-            <div className="flex  gap-8 items-center">
-                <button type="button" onClick={handleOpenModalLogin} className="text-white font-bold ">{t("auth.login")}</button>
-                <button type="button" onClick={handleOpenModalRegister} className="text-white font-bold text-nowrap items-center justify-center px-4 h-12 rounded-lg bg-red-400 hover:drop-shadow-[0_0_6px_white] transition-all duration-300" >{t("auth.signup")}</button>
-                <div className="w-1 h-[80px] rounded bg-yellow-200"></div>
-                <button type="button"><IoExitOutline size={40} color="white"/></button></div>
+        <header className="fixed z-10 w-full h-40 bg-[linear-gradient(to_left,rgba(220,38,38,1),rgba(220,38,38,0)),url('/header.jpg')] bg-cover bg-center flex items-center  pr-10 py-4 shadow-lg">
+            <div className="flex  gap-8 items-center ml-auto">
+                 <Image src="/PW.png" alt="logo PW" width={140} height={130} className="w-36 h-auto" />
+                {!isLoggedIn && <Link href="/login" className=" w-[52px] h-full text-white font-bold hover:underline transition-all duration-300">{t("auth.login")}</Link>}
+                {!isLoggedIn && <Link href="/register" className="w-[130px] text-white font-bold text-nowrap flex items-center justify-center px-4 h-12 rounded-lg bg-red-400 hover:drop-shadow-[0_0_6px_white] transition-all duration-300" >{t("auth.signup")}</Link>}
+                {isLoggedIn && <div className="w-1 h-[80px] rounded bg-yellow-200"></div>}
+                {isLoggedIn && <button type="button" onClick={hanleLogout}><IoExitOutline size={40} color="white" /></button>}
+                </div>
         </header>
     )
 }

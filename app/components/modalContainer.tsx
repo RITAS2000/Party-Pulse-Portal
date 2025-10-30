@@ -4,8 +4,9 @@ import {
   selectIsModalOpen,
 } from '../../redux/modals/selectors';
 import ReUseModal from './reUseModal';
-import ModalRegister from './modalRegister';
-import ModalLogin from './modalLogin';
+
+
+import ModalForgotPassword from './modalForgotPassword';
 
 
 export default function ReModalContainer() {
@@ -16,8 +17,7 @@ export default function ReModalContainer() {
 
   return (
     <ReUseModal>
-          {type === 'register' && <ModalRegister />}
-          {type === 'login' && <ModalLogin />}
+      {type === "forgot" && <ModalForgotPassword/>}
      </ReUseModal>
   );
 }

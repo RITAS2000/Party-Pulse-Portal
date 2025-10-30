@@ -9,10 +9,10 @@
   box-sizing: border-box;
 }
 
-html {
-  /* overflow-y: scroll; */
+/* html {
+  overflow-y: scroll;
   scroll-behavior: smooth;
-}
+} */
 
 ul {
   margin: 0;

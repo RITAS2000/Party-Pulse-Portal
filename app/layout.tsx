@@ -7,6 +7,8 @@ import i18n from "../i18n";
 import ReModalContainer from "./components/modalContainer";
 import { ReduxProvider } from "./components/reduxProvider";
 import { ToastContainer } from 'react-toastify';
+import PersistProvider from "./components/persistProvider";
+import Header from "./components/header";
 
 
 
@@ -22,14 +24,17 @@ export default function RootLayout({ children }: Props) {
         <title>Party Pulse Portal</title>
          <link rel="icon" href="/favicon.png" type="image/x-icon" />
       </head>
-      <body>
+      <body className="bg-[linear-gradient(to_top_left,#8b5cf6_0%,rgba(139,92,246,0)_100%)] ">
          
          <I18nextProvider i18n={i18n}>
-          <Sidebar/>
           <ReduxProvider>
+          <PersistProvider>
+              <Sidebar />
+              <Header/>
           {children}
             <ReModalContainer />
-            <ToastContainer position="bottom-center" autoClose={3000} hideProgressBar={false} newestOnTop={false} rtl={false} pauseOnFocusLoss draggable={false} pauseOnHover theme="dark"/>
+              <ToastContainer position="bottom-center" autoClose={3000} hideProgressBar={false} newestOnTop={false} rtl={false} pauseOnFocusLoss draggable={false} pauseOnHover theme="dark" />
+          </PersistProvider>
           </ReduxProvider>
           </I18nextProvider>
          

@@ -1,12 +1,18 @@
+'use client'
 import React from "react";
-import Header from "./components/header";   
+
+import { useTranslation } from "react-i18next";
 
 export default function Home() {
+    const { t } = useTranslation();
   return (
  
-    <main className="ml-70 ">
-      <Header />
-      <h1 className="pl-80"> hi hhh</h1></main> 
+    <main className="pl-80 pt-40">
+   
+       <div className="ml-80 pl-20 pr-6 text-gray-700 font-serif text-5xl">
+                      <h1>{t("header.welcome")}</h1>
+                     
+                  </div></main> 
     
   );
 }

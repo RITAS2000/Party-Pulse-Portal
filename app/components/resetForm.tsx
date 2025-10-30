@@ -5,34 +5,28 @@ import { useTranslation } from 'react-i18next';
 import { toast } from 'react-toastify';
 import Button from './button';
 import { TbPasswordUser } from "react-icons/tb";
-import { FiUser } from "react-icons/fi";
-import { MdOutlineEmail } from "react-icons/md";
-import { useState } from 'react';
+import {  useState } from 'react';
 import { AiOutlineEye, AiOutlineEyeInvisible } from 'react-icons/ai';
 import { useDispatch } from 'react-redux';
-import { registerUser } from '../../redux/auth/operation';
+import { resetPassword } from "../../redux/auth/operation"
+
 import type { AppDispatch } from '../../redux/store';
-import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 
 
 
 
-export default function RegisterForm() {
-    const { t } = useTranslation();
-    const dispatch = useDispatch<AppDispatch>();
+export default function ResetForm() { 
+  const [showPassword, setShowPassword] = useState(false);
+  const [showConfirm, setShowConfirm] = useState(false);
+  const router = useRouter();
+  const { t } = useTranslation();
+  const dispatch = useDispatch<AppDispatch>();
+
+
+
 
     const validationSchema = Yup.object().shape({
-  username: Yup.string()
-    .min(3,  t('yup.minName'))
-    .max(16, t('yup.maxName'))
-    .required(t('yup.requiredName')),
-
-  email: Yup.string()
-    .email(t('yup.invalidEmail'))
-    .matches(/^[a-zA-Z0-9._-]+@[a-zA-Z0-9._-]+\.[a-zA-Z]{2,4}$/, t('yup.invalidEmailFormat'))
-    .max(128, t('yup.maxEmail'))
-    .required(t('yup.requiredEmail')),
-
   password: Yup.string()
     .min(8, t('yup.minPassword'))
     .max(64, t('yup.maxPassword'))
@@ -42,33 +36,40 @@ export default function RegisterForm() {
     .oneOf([Yup.ref('password')], t('yup.passwordMatches'))
     .required(t('yup.requiredConfirmPassword')),
 });
-  const [showPassword, setShowPassword] = useState(false);
-  const [showConfirm, setShowConfirm] = useState(false);
+  
     
     const initialValues = {
-    username: '',
-    email: '',
     password: '',
     confirm: '',
     };
+        const tokenFromQueryRaw = new URLSearchParams(window.location.search).get('token');
+const token = tokenFromQueryRaw || '';
+    const handleSubmit = async (formData: { password: string; confirm: string },
+  formikHelpers: { resetForm: () => void }
+) => {
+  const { password } = formData;
 
-        
-    const handleSubmit = async (formData: { username: string; email: string; password: string }, formikHelpers: { resetForm: () => void }) => {
-       const { username, email, password } = formData;
-    const resultAction = await dispatch(registerUser({ username, email, password }));
+if (!token) {
+    toast.error(t("form.toastMissing"));
+    return;
+      }
+      console.log("Token from query:", token);
+ const resultAction = await dispatch(resetPassword({ token, password }));
 
-      if (registerUser.fulfilled.match(resultAction)) {
-      
-      toast.success(t("toast.registrationSuccess"), {
-            className: 'w-auto text-green-300 font-bold text-lg'
-      });
-        formikHelpers.resetForm();
-    } else {
-        toast.error(t("toast.registrationError"), {
-            className: 'w-auto text-red-300 font-bold text-lg'
-        });
-    }
-  };
+if (resetPassword.fulfilled.match(resultAction)) {
+  
+  router.push('/');
+  toast.success(t("toast.resetSuccses"), {
+    className: 'w-auto text-green-300 font-bold text-lg'
+  });
+  formikHelpers.resetForm();
+} else {
+  // Виклик при помилці
+  toast.error(t("toast.resetError"), {
+    className: 'w-auto text-red-300 font-bold text-lg'
+  });
+}
+};
 
     return (<div className='flex flex-col gap-10'>
         <Formik
@@ -81,31 +82,11 @@ export default function RegisterForm() {
             >
             <Form className="w-[420px] flex flex-col gap-6">
                 <div>
-                <h2 className='font-serif text-3xl font-bold  text-red-800'>{t("auth.signup")}</h2>
-                    <p className='text-white font-sans'>{t("form.textRegister")}</p>
+                <h2 className='font-serif text-3xl font-bold  text-red-800'>{t("form.resetTitle")}</h2>
+            <p className='text-white font-sans'>{t("form.resetText")}</p>
                     </div>
-                <label className="relative mb-4">
-                    <span className='text-white font-sans font-bold text-xl'>{t("form.spanName")}</span>
-                    <FiUser size={24} color="#2563EB" className='absolute  left-2 top-9'/>
-                <Field
-                    type="text"
-                    name="username"
-                    className="w-full py-2 px-10 border border-gray-300 rounded hover:border-blue-600 hover:shadow-md
-              focus:border-blue-600 transition-all duration-300"
-                />
-                    <ErrorMessage name="username" component="span" className="absolute text-xs left-0 -bottom-3 text-gray-800 font-bold" />
-                </label>
-                 <label className="relative mb-4">
-                    <span className='text-white font-sans font-bold text-xl'>{t("form.spanEmail")}</span>
-                    <MdOutlineEmail size={24} color="#2563EB" className='absolute left-2 top-9'/>
-                <Field
-                    type="email"
-                    name="email"
-                    className="w-full py-2 px-10 border border-gray-300 rounded  hover:border-blue-600 hover:shadow-md
-              focus:border-blue-600 transition-all duration-300"
-                />
-                    <ErrorMessage name="email" component="span" className="absolute text-xs left-0 -bottom-3 text-gray-800 font-bold" />
-                </label>
+                
+                 
                  <label className="relative mb-4">
                     <span className='text-white font-sans font-bold text-xl'>{t("form.spanPassword")}</span>
                     <TbPasswordUser size={24} color="#2563EB" className='absolute  left-2 top-9' />
@@ -150,14 +131,12 @@ export default function RegisterForm() {
                   </button>
                     <ErrorMessage name="confirm" component="span" className="absolute text-xs left-0 -bottom-3 text-gray-800 font-bold" />
                 </label>
-                <Button type="submit">{t("form.buttonRegister") }</Button>
+                <Button type="submit">{t("form.resetBtn") }</Button>
         </Form>
         </Formik>
-         <div className='flex gap-2 justify-center'>
-            <p className='text-white'>{t("form.pathThree")}</p>
-                <Link href="/login" className="font-bold  text-red-800 underline hover:text-white transition-all duration-300">{t("form.pathFour")}</Link>
-        </div>
+         
         </div>
     )
 
 }
+    
