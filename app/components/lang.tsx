@@ -22,13 +22,13 @@ export default function LangBox() {
     return (
         <div className="w-40 flex justify-around">
            <button onClick={() => changeLanguage('uk')} className="w-7 h-7 rounded-full overflow-hidden border-2 border-white flex items-center justify-center hover:scale-110 transition-all duration-300 ">
-                <Image src="/UK.jpg" alt="uk-flag" width={24} height={24} className="object-cover" />
+                <Image src="/UK.jpg" alt="uk-flag" width={24} height={24} className="object-cover" unoptimized />
            </button>
            <button onClick={() => changeLanguage('en')} className="w-7 h-7 rounded-full overflow-hidden border-2 border-white flex items-center justify-center hover:scale-110 transition-all duration-300">
-                <Image src="/GB.jpg" alt="gb-flag" width={30} height={30} className="object-cover" />
+                <Image src="/GB.jpg" alt="gb-flag" width={30} height={30} className="object-cover" unoptimized />
            </button>
             <button onClick={() => changeLanguage('ru')} className="w-7 h-7 rounded-full overflow-hidden border-2 border-white flex items-center justify-center hover:scale-110 transition-all duration-300">
-                <Image src="/RU.jpg" alt="ru-flag" width={24} height={24} className="w-6 h-6 object-cover" />
+                <Image src="/RU.jpg" alt="ru-flag" width={24} height={24} className="w-6 h-6 object-cover" unoptimized/>
             </button>
         </div>)
 }

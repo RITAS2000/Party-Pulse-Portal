@@ -1,8 +1,12 @@
+
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 import { RootState } from '../store';
+
+
  
 axios.defaults.baseURL = process.env.NEXT_PUBLIC_API_URL;
+
 
 const clearAuthHeader = () => {
   delete axios.defaults.headers.common.Authorization;
@@ -50,6 +54,7 @@ export const loginUser = createAsyncThunk(
 );
 
 export const logout = createAsyncThunk('auth/logout', async (_, thunkAPI) => {
+  
   try {
     const state = thunkAPI.getState() as RootState; 
     const token = state.auth.accessToken;
@@ -67,6 +72,7 @@ export const logout = createAsyncThunk('auth/logout', async (_, thunkAPI) => {
     return;
   } catch (error: unknown) {
     clearAuthHeader();
+    
       if (axios.isAxiosError(error)) {
         return thunkAPI.rejectWithValue(error.message || 'Logout error');
       }

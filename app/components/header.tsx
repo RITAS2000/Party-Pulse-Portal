@@ -29,7 +29,7 @@ export default function Header({ }: HeaderProps) {
     return (
         <header className="fixed z-10 w-full h-40 bg-[linear-gradient(to_left,rgba(220,38,38,1),rgba(220,38,38,0)),url('/header.jpg')] bg-cover bg-center flex items-center  pr-10 py-4 shadow-lg">
             <div className="flex  gap-8 items-center ml-auto">
-                 <Image src="/PW.png" alt="logo PW" width={140} height={130} className="w-36 h-auto" />
+                 <Image src="/PW.png" alt="logo PW" width={140} height={130} className="w-36 h-auto" unoptimized/>
                 {!isLoggedIn && <Link href="/login" className=" w-[52px] h-full text-white font-bold hover:underline transition-all duration-300">{t("auth.login")}</Link>}
                 {!isLoggedIn && <Link href="/register" className="w-[130px] text-white font-bold text-nowrap flex items-center justify-center px-4 h-12 rounded-lg bg-red-400 hover:drop-shadow-[0_0_6px_white] transition-all duration-300" >{t("auth.signup")}</Link>}
                 {isLoggedIn && <div className="w-1 h-[80px] rounded bg-yellow-200"></div>}

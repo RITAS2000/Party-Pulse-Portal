@@ -1,62 +1,64 @@
 {
-    "sidebar":{
-        "coffee": "Buy me a coffee",
-        "navOne": "Central Hall"
-    },
-    "header":{
-        "welcome": "Welcome to Party Pulse Portal"
-    },
-    "auth": {
-        "login": "Login",
-        "signup": "Sign up"
+  "sidebar": {
+    "coffee": "Buy me a coffee",
+    "navOne": "Central Hall"
   },
-  "yup":{
-        "minName": "Name must be at least 3 characters",
-        "maxName": "Name must be at most 16 characters",
-        "requiredName": "Name is required",
-        "invalidEmail": "Invalid email address",
-        "maxEmail": "Email must be at most 128 characters",
-        "requiredEmail": "Email is required",
-        "minPassword": "Password must be at least 8 characters",
-        "maxPassword": "Password must be at most 64 characters",
-        "requiredPassword": "Password is required",
-        "passwordMatches": "Passwords must match",
-        "requiredConfirmPassword": "Confirm password is required",
-        "invalidEmailFormat": "Email format is invalid"
+  "header": {
+    "welcome": "Welcome to Party Pulse Portal"
+  },
+  "auth": {
+    "login": "Login",
+    "signup": "Sign up"
+  },
+  "yup": {
+    "minName": "Name must be at least 3 characters",
+    "maxName": "Name must be at most 16 characters",
+    "requiredName": "Name is required",
+    "invalidEmail": "Invalid email address",
+    "maxEmail": "Email must be at most 128 characters",
+    "requiredEmail": "Email is required",
+    "minPassword": "Password must be at least 8 characters",
+    "maxPassword": "Password must be at most 64 characters",
+    "requiredPassword": "Password is required",
+    "passwordMatches": "Passwords must match",
+    "requiredConfirmPassword": "Confirm password is required",
+    "invalidEmailFormat": "Email format is invalid"
   },
   "form": {
-        "textRegister": "Fill out the form to join the Party Pulse Portal and be able to participate in the GVG activity",
-        "textLogin": "Now log in to the portal to add your game character and start joining in clan GVGs", 
-        "spanName": "Name",
-        "spanEmail": "Email",   
-        "spanPassword": "Password",
-        "spanConfirmPassword": "Confirm Password",
-        "buttonRegister": "Register",
-        "buttonLogin": "Login",
-        "pathOne": "If you are not registered yet, please ",
-        "pathTwo": "Sign up",
-        "pathThree": "If you already have an account, please ",
-        "pathFour": "Login",
-        "textForgotPathOne": "Forgot your password:",
-        "textForgotPathTwo": "Recovery form",
-           "titleForgot": "Password Recovery",
-        "descriptionForgot": "Enter your email address. If this email is registered, you will receive a message with instructions to securely reset your password",
-        "buttonForget": "Send",
-        "resetTitle": "Change Password",
-        "resetText": "Enter your password, confirm it, and submit",
-        "resetBtn": "Change",
-        "nickname": "Nickname",
-        "race":"Race",
-        "level": "Level",
-        "addBtn": "Submit",
-        "nicknameTooShort": "Nickname is too short",
-        "nicknameTooLong": "Nickname is too long",
-        "nicknameRequired": "Nickname is required",
-        "levelTooLow": "Level is too low",
-        "levelTooHigh": "Level is too high",
-        "levelRequired": "Level is required",
-        "raceRequired": "Race is required"
-        
+    "textRegister": "Fill out the form to join the Party Pulse Portal and be able to participate in the GVG activity",
+    "textLogin": "Now log in to the portal to add your game character and start joining in clan GVGs",
+    "spanName": "Name",
+    "spanEmail": "Email",
+    "spanPassword": "Password",
+    "spanConfirmPassword": "Confirm Password",
+    "buttonRegister": "Register",
+    "buttonLogin": "Login",
+    "pathOne": "If you are not registered yet, please ",
+    "pathTwo": "Sign up",
+    "pathThree": "If you already have an account, please ",
+    "pathFour": "Login",
+    "textForgotPathOne": "Forgot your password:",
+    "textForgotPathTwo": "Recovery form",
+    "titleForgot": "Password Recovery",
+    "descriptionForgot": "Enter your email address. If this email is registered, you will receive a message with instructions to securely reset your password",
+    "buttonForget": "Send",
+    "resetTitle": "Change Password",
+    "resetText": "Enter your password, confirm it, and submit",
+    "resetBtn": "Change",
+    "nickname": "Nickname",
+    "race": "Race",
+    "level": "Level",
+    "addBtn": "Submit",
+    "nicknameTooShort": "Nickname is too short",
+    "nicknameTooLong": "Nickname is too long",
+    "nicknameRequired": "Nickname is required",
+    "levelTooLow": "Level is too low",
+    "levelTooHigh": "Level is too high",
+    "levelRequired": "Level is required",
+    "raceRequired": "Race is required",
+    "selectFile": "Select file",
+    "fileAdded": "File added",
+    "avatar": "Avatar"
   },
   "toast": {
     "registrationSuccess": "Registration successful!",
@@ -66,9 +68,10 @@
     "sendMail": "The email has been sent to the specified address.",
     "toastMissing": "Token is missing or invalid.",
     "resetSuccses": "Password has been successfully changed.",
-      "resetError": "Something went wrong. Please try again."
+    "resetError": "Something went wrong. Please try again.",
+    "sessionOff": "Session expired. Please log in again."
   },
-   "characters": {
+  "characters": {
     "druid": "Druid",
     "werewolf": "Werewolf",
     "archer": "Archer",

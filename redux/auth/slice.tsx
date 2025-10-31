@@ -25,7 +25,6 @@ const initialState: AuthState = {
   accessToken: null,
   expiresIn: null
    
-   
 };
 
 

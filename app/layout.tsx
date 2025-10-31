@@ -9,6 +9,8 @@ import { ReduxProvider } from "./components/reduxProvider";
 import { ToastContainer } from 'react-toastify';
 import PersistProvider from "./components/persistProvider";
 import Header from "./components/header";
+import  TokenGuard  from "./components/tokenGuard";
+
 
 
 
@@ -17,6 +19,7 @@ interface Props {
   children: ReactNode;
 }
 export default function RootLayout({ children }: Props) {
+ 
  
   return (
     <html lang="uk">
@@ -28,7 +31,8 @@ export default function RootLayout({ children }: Props) {
          
          <I18nextProvider i18n={i18n}>
           <ReduxProvider>
-          <PersistProvider>
+            <PersistProvider>
+                <TokenGuard />
               <Sidebar />
               <Header/>
           {children}

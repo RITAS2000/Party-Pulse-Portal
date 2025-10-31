@@ -20,26 +20,25 @@ export default function LoginForm() {
   const { t } = useTranslation();
   const dispatch = useDispatch<AppDispatch>();
   const router = useRouter();
-    
-  const validationSchema = Yup.object().shape({
-            
+  const [showPassword, setShowPassword] = useState(false);
+
+  const validationSchema = Yup.object().shape({         
     email: Yup.string()
       .email(t('yup.invalidEmail'))
       .matches(/^[a-zA-Z0-9._-]+@[a-zA-Z0-9._-]+\.[a-zA-Z]{2,4}$/, t('yup.invalidEmailFormat'))
       .max(128, t('yup.maxEmail'))
-      .required(t('yup.requiredEmail')),
-    
+      .required(t('yup.requiredEmail')),   
     password: Yup.string()
       .min(8, t('yup.minPassword'))
       .max(64, t('yup.maxPassword'))
       .required(t('yup.requiredPassword')),
-  });
-  const [showPassword, setShowPassword] = useState(false);
-    
+  }); 
+
   const initialValues = {
     email: '',
     password: '',
   };
+
   const handleSubmit = async (formData: { email: string; password: string }, formikHelpers: { resetForm: () => void }) => {
     const { email, password } = formData;
     const resultAction = await dispatch(loginUser({ email, password }));
@@ -49,8 +48,7 @@ export default function LoginForm() {
         className: 'w-auto text-green-300 font-bold text-lg'
       });
       formikHelpers.resetForm();
-      router.push("/");
-      
+      router.push("/");   
     } else {
       toast.error(t("toast.loginError"), {
         className: 'w-auto text-red-300 font-bold text-lg'
@@ -61,6 +59,7 @@ export default function LoginForm() {
   const hendleForgot = () => {
     dispatch(closeModal());
     dispatch(openModal({ type: 'forgot' }));
+
   }
     return (<div className='flex flex-col gap-10'>
       <Formik
@@ -109,8 +108,7 @@ export default function LoginForm() {
               )}
             </button>
             <ErrorMessage name="password" component="span" className="absolute text-xs left-0 -bottom-3 text-gray-800 font-bold" />
-          </label>
-                  
+          </label>      
           <Button type="submit">{t("form.buttonLogin")}</Button>
         </Form>
       </Formik>
