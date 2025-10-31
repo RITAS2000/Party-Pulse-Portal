@@ -1,9 +1,10 @@
 {
     "sidebar":{
-        "coffee": "Закинь на каву"
+        "coffee": "Закинь на каву",
+        "navOne": "Головна Зала"
     },
     "header": {
-        "welcome": "Ласкаво просимо до порталу Party Pulse"
+        "welcome": "Вітаю на порталі Party Pulse!"
     },
     "auth": {
         "login": "Увійти",
@@ -43,7 +44,18 @@
         "buttonForget": "Відправити",
         "resetTitle": "Зміна пароля",
         "resetText": "Введіть пароль, підтвердіть його та відправте",
-        "resetBtn": "Змінити"
+        "resetBtn": "Змінити",
+         "nickname": "Нік",
+        "race":"Раса",
+        "level":"Рівень",
+        "addBtn": "Підтвердити",
+        "nicknameTooShort": "Нік занадто короткий",
+        "nicknameTooLong": "Нік занадто довгий",
+        "nicknameRequired": "Нік обов'язковий",
+        "levelTooLow": "Рівень занадто низький",
+        "levelTooHigh": "Рівень занадто високий",
+        "levelRequired": "Рівень обов'язковий",
+        "raceRequired": "Раса обов'язкова"
         
   },
     "toast": {

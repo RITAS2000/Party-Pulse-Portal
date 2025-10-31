@@ -99,12 +99,9 @@ export const resetPassword = createAsyncThunk(
     try {
   const res = await axios.post(
   '/party/auth/reset-password',
-  { token, password}, // токен всередині body
-  { headers: { 'Content-Type': 'application/json' } }
-
-
-      );
-
+  { token, password},
+  { headers: { 'Content-Type': 'application/json' }}
+);
       return res.data;
     } catch (error: unknown) {
       if (axios.isAxiosError(error)) {

@@ -1,6 +1,7 @@
 {
     "sidebar":{
-        "coffee": "Buy me a coffee"
+        "coffee": "Buy me a coffee",
+        "navOne": "Central Hall"
     },
     "header":{
         "welcome": "Welcome to Party Pulse Portal"
@@ -43,7 +44,18 @@
         "buttonForget": "Send",
         "resetTitle": "Change Password",
         "resetText": "Enter your password, confirm it, and submit",
-        "resetBtn": "Change"
+        "resetBtn": "Change",
+        "nickname": "Nickname",
+        "race":"Race",
+        "level": "Level",
+        "addBtn": "Submit",
+        "nicknameTooShort": "Nickname is too short",
+        "nicknameTooLong": "Nickname is too long",
+        "nicknameRequired": "Nickname is required",
+        "levelTooLow": "Level is too low",
+        "levelTooHigh": "Level is too high",
+        "levelRequired": "Level is required",
+        "raceRequired": "Race is required"
         
   },
   "toast": {

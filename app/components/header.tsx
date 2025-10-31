@@ -8,6 +8,7 @@ import { selectIsLoggedIn } from "../../redux/auth/selectors"
 import { logout } from "../../redux/auth/operation";
 import { AppDispatch } from "../../redux/store";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 
 export interface HeaderProps {
@@ -16,10 +17,13 @@ export interface HeaderProps {
 
 
 export default function Header({ }: HeaderProps) {
-   
+    const router = useRouter();
     const isLoggedIn = useSelector(selectIsLoggedIn)
     const dispatch = useDispatch<AppDispatch>();
-    const hanleLogout =() => dispatch(logout());
+    const hanleLogout = () => {
+        dispatch(logout()); 
+        router.push("/");
+    };
         
      const { t } = useTranslation();
     return (

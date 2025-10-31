@@ -24,7 +24,7 @@ export default function RootLayout({ children }: Props) {
         <title>Party Pulse Portal</title>
          <link rel="icon" href="/favicon.png" type="image/x-icon" />
       </head>
-      <body className="bg-[linear-gradient(to_top_left,#8b5cf6_0%,rgba(139,92,246,0)_100%)] ">
+      <body className="bg-[linear-gradient(to_top_left,#d1d5db_0%,rgba(209,213,219,0.6)_30%,rgba(209,213,219,0)_100%)] ">
          
          <I18nextProvider i18n={i18n}>
           <ReduxProvider>

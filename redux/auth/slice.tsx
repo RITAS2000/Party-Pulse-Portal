@@ -3,8 +3,8 @@ import { forgotPassword, loginUser, logout, registerUser, resetPassword } from '
 
 interface AuthState {
   userData: null | {
+    userId: string,
     username: string,
-    email: string,
     role?: string,
     clanId?: string,
     isAdmin?: boolean,

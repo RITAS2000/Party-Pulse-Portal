@@ -13,11 +13,13 @@ import { useState } from 'react';
 import { closeModal, openModal } from '@/redux/modals/slice';
 import { loginUser } from '../../redux/auth/operation';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 
 
 export default function LoginForm() {
   const { t } = useTranslation();
   const dispatch = useDispatch<AppDispatch>();
+  const router = useRouter();
     
   const validationSchema = Yup.object().shape({
             
@@ -47,7 +49,8 @@ export default function LoginForm() {
         className: 'w-auto text-green-300 font-bold text-lg'
       });
       formikHelpers.resetForm();
-      dispatch(closeModal());
+      router.push("/");
+      
     } else {
       toast.error(t("toast.loginError"), {
         className: 'w-auto text-red-300 font-bold text-lg'

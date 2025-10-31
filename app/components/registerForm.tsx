@@ -13,13 +13,15 @@ import { useDispatch } from 'react-redux';
 import { registerUser } from '../../redux/auth/operation';
 import type { AppDispatch } from '../../redux/store';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 
 
 
 
 export default function RegisterForm() {
     const { t } = useTranslation();
-    const dispatch = useDispatch<AppDispatch>();
+  const dispatch = useDispatch<AppDispatch>();
+  const router = useRouter();
 
     const validationSchema = Yup.object().shape({
   username: Yup.string()
@@ -63,6 +65,7 @@ export default function RegisterForm() {
             className: 'w-auto text-green-300 font-bold text-lg'
       });
         formikHelpers.resetForm();
+        router.push("/login");
     } else {
         toast.error(t("toast.registrationError"), {
             className: 'w-auto text-red-300 font-bold text-lg'
