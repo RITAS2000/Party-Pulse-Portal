@@ -1,6 +1,6 @@
 "use client";
 import Image from "next/image";
-import React from "react";
+
 import { useTranslation } from 'react-i18next';
 import { IoExitOutline } from "react-icons/io5";
 import { useDispatch, useSelector } from "react-redux";
@@ -9,6 +9,8 @@ import { logout } from "../../redux/auth/operation";
 import { AppDispatch } from "../../redux/store";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import HeaderStats from "./headerStats";
+
 
 
 export interface HeaderProps {
@@ -20,6 +22,8 @@ export default function Header({ }: HeaderProps) {
     const router = useRouter();
     const isLoggedIn = useSelector(selectIsLoggedIn)
     const dispatch = useDispatch<AppDispatch>();
+
+
     const hanleLogout = () => {
         dispatch(logout()); 
         router.push("/");
@@ -28,6 +32,7 @@ export default function Header({ }: HeaderProps) {
      const { t } = useTranslation();
     return (
         <header className="fixed z-10 w-full h-40 bg-[linear-gradient(to_left,rgba(220,38,38,1),rgba(220,38,38,0)),url('/header.jpg')] bg-cover bg-center flex items-center  pr-10 py-4 shadow-lg">
+            <HeaderStats/>
             <div className="flex  gap-8 items-center ml-auto">
                  <Image src="/PW.png" alt="logo PW" width={140} height={130} className="w-36 h-auto" unoptimized/>
                 {!isLoggedIn && <Link href="/login" className=" w-[52px] h-full text-white font-bold hover:underline transition-all duration-300">{t("auth.login")}</Link>}

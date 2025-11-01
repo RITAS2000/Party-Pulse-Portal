@@ -19,9 +19,12 @@ export default function Navigate() {
                <SidebarItem pathname="/guilds">
                     Трон Кланів
                 </SidebarItem>
+                <SidebarItem pathname="/gallery">
+                    Галерея
+                </SidebarItem>
                 {isLoggedIn && (
                     <SidebarItem pathname={`/hero/${userId}`} >
-                        Куточок Героя
+                     Персонажи
                     </SidebarItem>)}
                  <SidebarItem pathname="/portal">
                     GvG Портал

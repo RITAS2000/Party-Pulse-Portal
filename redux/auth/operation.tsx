@@ -22,7 +22,6 @@ export const registerUser = createAsyncThunk(
     'Content-Type': 'application/json'
   }
 });
-      console.log('📦 Дані з сервера:', response.data);
       return response.data;
     } catch (error: unknown) {
        if (axios.isAxiosError(error)) {
@@ -42,7 +41,6 @@ export const loginUser = createAsyncThunk(
     'Content-Type': 'application/json'
   }
 });
-      console.log('📦 Дані з сервера:', response.data);
       return response.data;
     } catch (error: unknown) {
        if (axios.isAxiosError(error)) {

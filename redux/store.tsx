@@ -2,6 +2,7 @@ import { configureStore, combineReducers } from '@reduxjs/toolkit';
 import modalReducer from './modals/slice';
 import authReducer from './auth/slice';
 import langReducer from './lang/slice';
+import charReduser from "./char/slice"
 import storage from 'redux-persist/lib/storage';
 import {
   FLUSH,
@@ -38,6 +39,7 @@ const rootPersistConfig = {
 };
 
 const rootReducer = combineReducers({
+  char: charReduser,
   modal: modalReducer,
   auth: persistedAuthReducer,
   lang: persistedLangReducer,

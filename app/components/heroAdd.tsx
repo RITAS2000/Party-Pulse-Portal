@@ -11,22 +11,32 @@ import { useTranslation } from 'react-i18next';
 import { FiCheckCircle, FiDownloadCloud } from 'react-icons/fi';
 import imageCompression from 'browser-image-compression';
 import { toast } from 'react-toastify';
-import { createCharacter } from '@/redux/char/operation';
-import { useDispatch } from 'react-redux';
+import { createCharacter, getCharacter } from '@/redux/char/operation';
+import { useDispatch, useSelector } from 'react-redux';
 import { AppDispatch } from '@/redux/store';
+import { ClockLoader } from 'react-spinners';
+import { selectIsLoading } from '@/redux/char/selectors';
 
 interface FormValues {
+  server: string;
   nickname: string;
   race: string;
   level: number;
   avatar: File | null;
+ 
 }
 
 export default function HeroForm() {
   const { t } = useTranslation();
   const dispatch = useDispatch<AppDispatch>();
+  const isLoading = useSelector(selectIsLoading)
+
 
   const validationSchema = Yup.object().shape({
+    server: Yup.string()
+      .min(2, t('form.serverTooShort'))
+      .max(16, t('form.serverTooLong'))
+      .required(t('form.serverRequired')),
     nickname: Yup.string()
       .min(2, t('form.nicknameTooShort'))
       .max(10, t('form.nicknameTooLong'))
@@ -39,19 +49,18 @@ export default function HeroForm() {
       .max(105, t('form.levelTooHigh'))
       .required(t('form.levelRequired')),
 
-    avatar: Yup.mixed<File>()
-      .test(
-        'fileSize',
-        t('validation.fileTooLarge'),
-        value => !value || value.size <= 5 * 1024 * 1024
-      )
-      .test(
-        'fileType',
-        t('validation.unsupportedFormat'),
-        value =>
-          !value ||
-          ['image/jpeg', 'image/png', 'image/gif'].includes(value.type)
-      ),
+    avatar: Yup.mixed()
+      .nullable()
+      .test('fileSize', t('validation.fileTooLarge'), value => {
+        const file = value as File | null | undefined;
+        return !file || file.size <= 5 * 1024 * 1024;
+      })
+      .test('fileType', t('validation.unsupportedFormat'), value => {
+        const file = value as File | null | undefined;
+        return (
+          !file || ['image/jpeg', 'image/png', 'image/gif'].includes(file.type)
+        );
+      }),
   });
   const characterKeys = [
     'druid',
@@ -63,40 +72,45 @@ export default function HeroForm() {
   ];
 
   const initialValues = {
+    server: '',
     nickname: '',
     race: characterKeys[0],
-    level: '',
+    level: 1,
     avatar: null,
   };
 
- const handleSubmit = async (
-  values: FormValues,
-  formikHelpers: { resetForm: () => void }
-) => {
- 
-     const payload = {
-    nickname: values.nickname,
-    race: values.race,
-    level: values.level.toString(), 
-    avatar: values.avatar!,
-  };
+  const handleSubmit = async (
+    values: FormValues,
+    formikHelpers: { resetForm: () => void }
+  ) => {
+    const response = await fetch('/coffee.png');
+    const blob = await response.blob();
+    const defaultAvatar = new File([blob], 'coffee.png', { type: blob.type });
+    const payload = {
+      server: values.server,
+      nickname: values.nickname,
+      race: values.race,
+      level: values.level.toString(),
+      avatar: values.avatar || defaultAvatar,
+    };
+    console.log('payload', payload);
     const resultAction = await dispatch(createCharacter(payload));
 
     if (createCharacter.fulfilled.match(resultAction)) {
-      toast.success("Персонаж створено!", {
-        className: 'w-auto text-green-300 font-bold text-lg'
+      toast.success(t('toast.characterCreated'), {
+        className: 'w-auto text-green-300 font-bold text-lg',
       });
       formikHelpers.resetForm();
-     
+      dispatch(getCharacter());
     } else {
-      toast.error("Помилка при створенні персонажа!", {
-        className: 'w-auto text-red-300 font-bold text-lg'
+      toast.error(t('toast.characterCreateError'), {
+        className: 'w-auto text-red-300 font-bold text-lg',
       });
     }
-
-};
+  };
 
   return (
+  <div className="w-auto h-auto px-12 py-6 border-solid border  border-gray-700">
     <Formik
       initialValues={initialValues}
       onSubmit={handleSubmit}
@@ -109,6 +123,25 @@ export default function HeroForm() {
         encType="multipart/form-data"
         className="w-auto flex flex-row flex-wrap gap-12 items-end"
       >
+        <label className="relative w-52">
+          <span className="text-gray-700 font-sans font-bold text-xl">
+            {t('form.server')}
+          </span>
+          <Field
+            type="text"
+            name="server"
+            minLength={2}
+            maxLength={16}
+            className="w-full h-11 py-2 px-10 border border-gray-300 rounded hover:border-blue-600 hover:shadow-md
+                       focus:border-blue-600 transition-all duration-300"
+          />
+          <ErrorMessage
+            name="server"
+            component="span"
+            className="absolute text-xs left-0 -bottom-3 text-gray-800 font-bold"
+          />
+        </label>
+
         <label className="relative w-52">
           <span className="text-gray-700 font-sans font-bold text-xl">
             {t('form.nickname')}
@@ -234,7 +267,6 @@ export default function HeroForm() {
                       </div>
                     );
                   })()}
-                  {/* <span>{t("form.selectFile")}</span> */}
                 </div>
               </>
             )}
@@ -250,9 +282,10 @@ export default function HeroForm() {
           type="submit"
           className="ml-auto font-bold h-11 text-xl px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition-colors duration-300"
         >
-          {t('form.addBtn')}
+         {isLoading ? <ClockLoader size={30} color="white"/> : t('form.addBtn')}
         </button>
       </Form>
-    </Formik>
+      </Formik></div>
+     
   );
 }

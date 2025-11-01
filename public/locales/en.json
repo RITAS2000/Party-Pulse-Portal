@@ -4,7 +4,22 @@
     "navOne": "Central Hall"
   },
   "header": {
-    "welcome": "Welcome to Party Pulse Portal"
+    "welcome": "Welcome to Party Pulse Portal",
+    "players": "Players",
+    "characters": "Characters",
+    "clans": "Clans"
+  },
+  "page": {
+    "addChar": "Add character",
+    "ul": {
+      "title": "This is your characters page. Here you can:",
+      "item1": "add and delete characters;",
+      "item2": "edit the character's level after creation;",
+      "item3": "if you have more than one character — change their order in the collection;",
+      "item4": "join clan wars with a single click.",
+      "note": "If something is unclear, you can read the guide."
+    },
+    "notChars": "You don’t have any characters yet"
   },
   "auth": {
     "login": "Login",
@@ -58,7 +73,15 @@
     "raceRequired": "Race is required",
     "selectFile": "Select file",
     "fileAdded": "File added",
-    "avatar": "Avatar"
+    "avatar": "Avatar",
+    "server": "Server",
+    "serverTooShort": "Server name is too short",
+    "serverTooLong": "Server name is too long",
+    "serverRequired": "Server name is required",
+    "deleteTitle": "Delete Character",
+    "deleteDescription": "Are you sure you want to delete this character?",
+    "deleteConfirm": "Yes",
+    "deteteCancel": "No"
   },
   "toast": {
     "registrationSuccess": "Registration successful!",
@@ -69,8 +92,12 @@
     "toastMissing": "Token is missing or invalid.",
     "resetSuccses": "Password has been successfully changed.",
     "resetError": "Something went wrong. Please try again.",
-    "sessionOff": "Session expired. Please log in again."
+    "sessionOff": "Session expired. Please log in again.",
+    "characterCreated": "Character successfully added!",
+    "characterCreateError": "Error adding character!",
+    "deleteChar": "Character successfully deleted."
   },
+
   "characters": {
     "druid": "Druid",
     "werewolf": "Werewolf",
