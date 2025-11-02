@@ -17,7 +17,7 @@ export default function HeaderStats() {
       setStats({
         players: res.data.usersCount,
         characters: res.data.charsCount,
-        clans: 0, 
+        clans: res.data.clansCount, 
       });
   
   };

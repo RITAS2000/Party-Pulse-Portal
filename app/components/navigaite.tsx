@@ -16,18 +16,20 @@ export default function Navigate() {
                   <SidebarItem pathname="/">
                     {t("sidebar.navOne")}
                 </SidebarItem>
-               <SidebarItem pathname="/guilds">
+                {isLoggedIn && (
+               <SidebarItem pathname="/clan/create">
                     Трон Кланів
-                </SidebarItem>
-                <SidebarItem pathname="/gallery">
-                    Галерея
-                </SidebarItem>
+                </SidebarItem>)}
+                
                 {isLoggedIn && (
                     <SidebarItem pathname={`/hero/${userId}`} >
                      Персонажи
                     </SidebarItem>)}
                  <SidebarItem pathname="/portal">
                     GvG Портал
+                </SidebarItem>
+                <SidebarItem pathname="/gallery">
+                    Галерея
                 </SidebarItem>
                 {isAdmin && (
                 <SidebarItem pathname="/admin">

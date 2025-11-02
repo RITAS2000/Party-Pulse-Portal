@@ -53,7 +53,7 @@ if (!token) {
     toast.error(t("form.toastMissing"));
     return;
       }
-      console.log("Token from query:", token);
+
  const resultAction = await dispatch(resetPassword({ token, password }));
 
 if (resetPassword.fulfilled.match(resultAction)) {
@@ -64,7 +64,7 @@ if (resetPassword.fulfilled.match(resultAction)) {
   });
   formikHelpers.resetForm();
 } else {
-  // Виклик при помилці
+
   toast.error(t("toast.resetError"), {
     className: 'w-auto text-red-300 font-bold text-lg'
   });

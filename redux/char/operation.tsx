@@ -58,8 +58,8 @@ export const createCharacter = createAsyncThunk(
 );
 
 export const deleteCharacter = createAsyncThunk<
-  string, // будемо повертати ID видаленого персонажа
-  string, // передаємо ID персонажа
+  string, 
+  string, 
   { rejectValue: string }
     >('char/deleteCharacter', async (characterId, thunkAPI) => {
     const state = thunkAPI.getState() as ReturnType<typeof store.getState>;

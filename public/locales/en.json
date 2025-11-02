@@ -11,12 +11,14 @@
   },
   "page": {
     "addChar": "Add character",
+    "addClan": "Add clan",
     "ul": {
       "title": "This is your characters page. Here you can:",
       "item1": "add and delete characters;",
       "item2": "edit the character's level after creation;",
       "item3": "if you have more than one character — change their order in the collection;",
       "item4": "join clan wars with a single click.",
+      "item5": "add characters to the gallery, after moderation they will appear in the gallery;",
       "note": "If something is unclear, you can read the guide."
     },
     "notChars": "You don’t have any characters yet"
@@ -81,7 +83,10 @@
     "deleteTitle": "Delete Character",
     "deleteDescription": "Are you sure you want to delete this character?",
     "deleteConfirm": "Yes",
-    "deteteCancel": "No"
+    "deteteCancel": "No",
+     "clanName": "Clan Name",
+    "clanColor": "Clan Color",
+    "logo": "Logo"
   },
   "toast": {
     "registrationSuccess": "Registration successful!",
@@ -105,5 +110,19 @@
     "priest": "Priest",
     "mage": "Mage",
     "warrior": "Warrior"
+  },
+  "color": {
+   
+  "red": "Red",
+  "blue": "Blue",
+  "green": "Green",
+  "yellow": "Yellow",
+  "purple": "Purple",
+  "orange": "Orange",
+  "gray": "Gray",
+  "pink": "Pink",
+  "teal": "Teal",
+  "indigo": "Indigo"
+
   }
 }

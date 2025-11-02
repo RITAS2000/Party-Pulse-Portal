@@ -11,11 +11,13 @@ export default function UlTextChar() {
         <li className="text-lg text-gray-700">{t("page.ul.item2")}</li>
         <li className="text-lg text-gray-700">
           {t("page.ul.item3")}
-        </li>
-        <li className="text-lg text-gray-700">{t("page.ul.item4")}</li>
+              </li>
+              <li className="text-lg text-gray-700">{t("page.ul.item5")}</li>
+              <li className="text-lg text-gray-700">{t("page.ul.item4")}</li>
+              
       </ul>
     
-      <p className="text-lg mt-2 text-gray-700">{t("page.ul.note")}</p>
+      {/* <p className="text-lg mt-2 text-gray-700">{t("page.ul.note")}</p> */}
     </div>
   );
 }

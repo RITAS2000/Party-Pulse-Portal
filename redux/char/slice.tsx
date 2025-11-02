@@ -7,14 +7,17 @@ interface Character {
   race: string;
   level: number;
   avatar: string | null;
+  clanId: string;
 }
 interface CharState {
   charData: {
+    _id: string;
     server: string;
     nickname: string;
     race: string;
     level: string;
     avatar: string;
+    clanId: string;
   };
   loading: boolean;
   error: string | null;
@@ -22,11 +25,13 @@ interface CharState {
 }
 const initialState: CharState = {
   charData: {
+    _id: '',
     server: '',
     nickname: '',
     race: '',
     level: '',
     avatar: '',
+    clanId: '',
   },
   loading: false,
   error: null,

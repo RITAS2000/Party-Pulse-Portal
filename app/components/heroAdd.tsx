@@ -93,7 +93,7 @@ export default function HeroForm() {
       level: values.level.toString(),
       avatar: values.avatar || defaultAvatar,
     };
-    console.log('payload', payload);
+  
     const resultAction = await dispatch(createCharacter(payload));
 
     if (createCharacter.fulfilled.match(resultAction)) {
@@ -168,10 +168,10 @@ export default function HeroForm() {
 
           <Field name="race">
             {({ field, form }: FieldProps<FormValues>) => (
-              <Listbox
+              <Listbox 
                 value={field.value}
                 onChange={value => form.setFieldValue('race', value)}
-              >
+              ><div className="relative w-full">
                 <ListboxButton
                   className="w-full h-11 text-left py-2 px-10 border outline-none bg-white border-gray-300 rounded hover:border-blue-600 hover:shadow-md
                          focus:border-blue-600 transition-all duration-300"
@@ -190,7 +190,8 @@ export default function HeroForm() {
                       {t(`characters.${key}`)}
                     </ListboxOption>
                   ))}
-                </ListboxOptions>
+                    </ListboxOptions>
+                    </div>
               </Listbox>
             )}
           </Field>

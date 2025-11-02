@@ -2,7 +2,8 @@ import { configureStore, combineReducers } from '@reduxjs/toolkit';
 import modalReducer from './modals/slice';
 import authReducer from './auth/slice';
 import langReducer from './lang/slice';
-import charReduser from "./char/slice"
+import charReduser from "./char/slice";
+import clanReduser from "./clan/slice";
 import storage from 'redux-persist/lib/storage';
 import {
   FLUSH,
@@ -14,6 +15,7 @@ import {
 } from 'redux-persist';
 import persistReducer from 'redux-persist/es/persistReducer';
 import persistStore from 'redux-persist/es/persistStore';
+import { galleryReducer } from './gallery/slice';
 
 const authPersistConfig = {
   key: 'auth',
@@ -39,6 +41,8 @@ const rootPersistConfig = {
 };
 
 const rootReducer = combineReducers({
+  clan: clanReduser,
+  gallery: galleryReducer,
   char: charReduser,
   modal: modalReducer,
   auth: persistedAuthReducer,

@@ -7,6 +7,7 @@ import { getCharacter } from '@/redux/char/operation';
 import { startTransition } from 'react';
 import axios from 'axios';
 import { useTranslation } from 'react-i18next';
+import { fetchGallery } from '@/redux/gallery/operation';
 
 export type CharacterType = {
   _id: string;
@@ -15,6 +16,7 @@ export type CharacterType = {
   race: string;
   level: number;
   avatar: string | null;
+  galleryId?: string;
 };
 
 export default function CharList() {
@@ -23,7 +25,9 @@ export default function CharList() {
   const charactersFromStore = useSelector(selectUserChars) as CharacterType[];
   const [characters, setCharacters] = useState<CharacterType[]>([]);
   const [dragIndex, setDragIndex] = useState<number | null>(null);
-
+    useEffect(() => {
+       dispatch(fetchGallery());
+     }, [dispatch]);
   useEffect(() => {
     dispatch(getCharacter());
   }, [dispatch]);
@@ -40,14 +44,17 @@ export default function CharList() {
   ) => {
     setDragIndex(index);
     e.dataTransfer.effectAllowed = 'move';
-    e.dataTransfer.setData('text/plain', index.toString()); 
+    e.dataTransfer.setData('text/plain', index.toString());
   };
 
   const handleDragOver = (e: React.DragEvent<HTMLLIElement>) => {
     e.preventDefault();
   };
 
-  const handleDrop = async (e: React.DragEvent<HTMLLIElement>, index: number) => {
+  const handleDrop = async (
+    e: React.DragEvent<HTMLLIElement>,
+    index: number
+  ) => {
     e.preventDefault();
     const draggedFrom =
       dragIndex ?? parseInt(e.dataTransfer.getData('text/plain'));
@@ -63,15 +70,16 @@ export default function CharList() {
     }));
 
     await axios.patch('http://localhost:8080/party/char/reorder', {
-        order: reorderedIds,
-      });
-   
+      order: reorderedIds,
+    });
 
     setDragIndex(null);
   };
 
   if (!characters || characters.length === 0) {
-      return <p className='text-xl text-gray-400 pl-12 pt-4'>{t("page.notChars")}</p>;
+    return (
+      <p className="text-xl text-gray-400 pl-12 pt-4">{t('page.notChars')}</p>
+    );
   }
 
   return (
@@ -82,8 +90,8 @@ export default function CharList() {
           draggable
           onDragStart={e => handleDragStart(e, index)}
           onDragOver={handleDragOver}
-          onDrop={e => handleDrop(e, index)}
-    
+              onDrop={e => handleDrop(e, index)}
+        
         >
           <CharItem character={char} />
         </li>
