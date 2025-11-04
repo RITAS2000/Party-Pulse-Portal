@@ -72,7 +72,7 @@ export default function ForgotPasswordForm() {
                            type="email"
                            name="email"
                            className="w-full py-2 px-10 border border-gray-300 rounded  hover:border-blue-600 hover:shadow-md
-                     focus:border-blue-600 transition-all duration-300"
+                     focus:border-blue-600 transition-all duration-300 text-gray-700"
                        />
                            <ErrorMessage name="email" component="span" className="absolute text-xs left-0 -bottom-3 text-gray-800 font-bold" />
                        </label>

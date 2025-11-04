@@ -1,6 +1,7 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 import { store } from '../store';
+import { Character } from './slice';
 
 
 export const getCharacter = createAsyncThunk(
@@ -61,16 +62,16 @@ export const deleteCharacter = createAsyncThunk<
   string, 
   string, 
   { rejectValue: string }
-    >('char/deleteCharacter', async (characterId, thunkAPI) => {
+    >('char/deleteCharacter', async (charId, thunkAPI) => {
     const state = thunkAPI.getState() as ReturnType<typeof store.getState>;
         const token = state.auth.accessToken;
   try {
-    await axios.delete(`/party/char/${characterId}`, {
+    await axios.delete(`/party/char/${charId}`, {
         headers: {
               Authorization: `Bearer ${token}`,
         }
       });
-    return characterId; 
+    return charId; 
   } catch (error: unknown) {
        if (axios.isAxiosError(error)) {
         return thunkAPI.rejectWithValue(error.message || 'Delete error');
@@ -78,4 +79,50 @@ export const deleteCharacter = createAsyncThunk<
       return thunkAPI.rejectWithValue('Delete error'); 
     }
     
+    });
+
+    export const getCharacterById = createAsyncThunk<
+  Character,   
+  string,     
+  { rejectValue: string }
+>('char/getCharById', async (charId, thunkAPI) => {
+  const state = thunkAPI.getState() as ReturnType<typeof store.getState>;
+  const token = state.auth.accessToken;
+ console.log("🚀 ~ charId:", charId)
+  try {
+    const response = await axios.get(`/party/char/${charId}`, {
+      
+      headers: { Authorization: `Bearer ${token}` },
+    });
+    return response.data; 
+  } catch (error: unknown) {
+    if (axios.isAxiosError(error)) {
+      return thunkAPI.rejectWithValue(error.message || 'Get character error');
+    }
+    return thunkAPI.rejectWithValue('Get character error');
+  }
 });
+
+export const getAllCharacters = createAsyncThunk<
+  Character[],   
+  void,          
+  { rejectValue: string }
+>(
+  'char/getAllChars',
+  async (_, thunkAPI) => {
+    const state = thunkAPI.getState() as ReturnType<typeof store.getState>;
+    const token = state.auth.accessToken;
+
+    try {
+      const response = await axios.get('/party/char', {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+      return response.data; 
+    } catch (error: unknown) {
+      if (axios.isAxiosError(error)) {
+        return thunkAPI.rejectWithValue(error.message || 'Get characters error');
+      }
+      return thunkAPI.rejectWithValue('Get characters error');
+    }
+  }
+);

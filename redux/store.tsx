@@ -2,8 +2,8 @@ import { configureStore, combineReducers } from '@reduxjs/toolkit';
 import modalReducer from './modals/slice';
 import authReducer from './auth/slice';
 import langReducer from './lang/slice';
-import charReduser from "./char/slice";
-import clanReduser from "./clan/slice";
+import charReducer from "./char/slice";
+import clanReducer from "./clan/slice";
 import storage from 'redux-persist/lib/storage';
 import {
   FLUSH,
@@ -41,9 +41,9 @@ const rootPersistConfig = {
 };
 
 const rootReducer = combineReducers({
-  clan: clanReduser,
+  clan: clanReducer,
   gallery: galleryReducer,
-  char: charReduser,
+  char: charReducer,
   modal: modalReducer,
   auth: persistedAuthReducer,
   lang: persistedLangReducer,

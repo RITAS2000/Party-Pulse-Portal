@@ -94,7 +94,7 @@ if (resetPassword.fulfilled.match(resultAction)) {
                     type={showPassword ? 'text' : 'password'}
                     name="password"
                     className="w-full py-2 px-10 border border-gray-300 rounded  hover:border-blue-600 hover:shadow-md
-              focus:border-blue-600 transition-all duration-300"
+              focus:border-blue-600 transition-all duration-300 text-gray-700"
                     />
                      <button
                     type="button"
@@ -116,7 +116,7 @@ if (resetPassword.fulfilled.match(resultAction)) {
                     type={showConfirm ? 'text' : 'password'}
                     name="confirm"
                     className="w-full py-2 px-10 border border-gray-300 rounded  hover:border-blue-600 hover:shadow-md
-              focus:border-blue-600 transition-all duration-300"
+              focus:border-blue-600 transition-all duration-300 text-gray-700"
                     />
                      <button
                     type="button"

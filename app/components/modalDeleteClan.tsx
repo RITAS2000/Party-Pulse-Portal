@@ -1,43 +1,53 @@
 'use client';
-import { deleteCharacter } from '@/redux/char/operation';
-import { selectIsLoading } from '@/redux/char/selectors';
+
 import { closeModal } from '@/redux/modals/slice';
 import { AppDispatch } from '@/redux/store';
 import { useDispatch, useSelector } from 'react-redux';
 import { ClockLoader } from 'react-spinners';
 import { toast } from 'react-toastify';
 import { useTranslation } from 'react-i18next';
+import { deleteClan, getClans } from '@/redux/clan/operation';
+import { selectClansLoading } from '@/redux/clan/selectors';
 
-type ModalDeleteCharProps = {
-  charId: string;
+type ModalDeleteClanProps = {
+  clanId: string;
 };
 
-export default function ModalDeleteChar({ charId }: ModalDeleteCharProps) {
-  const isLoading = useSelector(selectIsLoading);
+export default function ModalDeleteClan({ clanId }: ModalDeleteClanProps) {
+  const isLoading = useSelector(selectClansLoading);
   const dispatch = useDispatch<AppDispatch>();
   const { t } = useTranslation();
 
-    const handleDelete = () => {
-    dispatch(deleteCharacter(charId));
-    dispatch(closeModal());
-    toast.success(t("toast.deleteChar"));
-  };
+ const handleDelete = async () => {
+
+    const resultAction = await dispatch(deleteClan(clanId));
+    
+    if (deleteClan.fulfilled.match(resultAction)) {
+      toast.success(t("toast.deleteClan"));
+      dispatch(getClans()); 
+      dispatch(closeModal());
+    } else {
+      toast.error(t("toast.deleteClanError"));
+    }
+ 
+  }
+
 
   return (
     <div className="flex flex-col gap-10">
       <div>
         <h2 className="font-serif text-3xl font-bold text-red-800">
-          {t("form.deleteTitle")}
+          {t("form.deleteClanTitle")}
         </h2>
         <p className="text-white font-sans">
-          {t("form.deleteDescription")}
+          {t("form.deleteClanDescription")}
         </p>
       </div>
       <div className="flex w-full justify-around">
         <button
           onClick={handleDelete}
           disabled={isLoading}
-          className="font-bold w-28 h-11 text-xl px-4 py-2 bg-red-600 text-white rounded hover:bg-blue-700 transition-colors duration-300"
+          className="font-bold w-28 h-11 text-xl flex justify-center items-center px-4 py-2 bg-red-600 text-white rounded hover:bg-blue-700 transition-colors duration-300"
         >
           {!isLoading ? (
             <span>{t("form.deleteConfirm")}</span>

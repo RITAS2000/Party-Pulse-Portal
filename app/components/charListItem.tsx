@@ -63,7 +63,7 @@ export default function CharItem({ character }: CharacterCardProps) {
       <div
         draggable={false}
         onDragStart={e => e.stopPropagation()}
-        className=" flex items-center justify-center w-48 h-60 overflow-hidden bg-black rounded-xl "
+              className=" flex items-center justify-center w-48 h-60 overflow-hidden bg-black rounded-xl shadow-[0_0_6px_rgba(255,255,255,1)] "
       >
         <Image
           src={avatar}
@@ -82,7 +82,7 @@ export default function CharItem({ character }: CharacterCardProps) {
           className="flex w-full justify-between"
         >
           <p className="font-bold">{t('form.race')}:</p>
-          <div className="w-7 h-7  bg-black  rounded-full">
+          <div className="w-7 h-7  bg-black  rounded-full shadow-[inset_0_0_6px_rgba(255,255,255,1)]">
             <Image
               src={icon}
               alt={character.race}
@@ -115,7 +115,7 @@ export default function CharItem({ character }: CharacterCardProps) {
         {t('form.server')}: {character.server}
       </p>
 
-      <div className="flex gap-2 w-full justify-around border-t border-t-gray-800 mt-2 pt-2">
+      <div className="flex gap-2 w-full justify-between border-t border-t-gray-800 mt-2 pt-2">
         <button
           type="button"
           onClick={handleToggleGallery}

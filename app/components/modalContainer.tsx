@@ -9,6 +9,7 @@ import ReUseModal from './reUseModal';
 
 import ModalForgotPassword from './modalForgotPassword';
 import ModalDeleteChar from './modalDeleteChar';
+import ModalDeleteClan from './modalDeleteClan';
 
 
 export default function ReModalContainer() {
@@ -21,7 +22,8 @@ export default function ReModalContainer() {
   return (
     <ReUseModal>
       {type === "forgot" && <ModalForgotPassword />}
-      {type === "deleteChar" && <ModalDeleteChar characterId={data}/>}
+      {type === "deleteChar" && <ModalDeleteChar charId={data} />}
+      {type === "deleteClan" && <ModalDeleteClan clanId={data} />}
      </ReUseModal>
   );
 }

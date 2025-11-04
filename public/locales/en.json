@@ -21,7 +21,8 @@
       "item5": "add characters to the gallery, after moderation they will appear in the gallery;",
       "note": "If something is unclear, you can read the guide."
     },
-    "notChars": "You don’t have any characters yet"
+    "notChars": "You don’t have any characters yet",
+    "notClans":  "Clans are absent"
   },
   "auth": {
     "login": "Login",
@@ -86,7 +87,19 @@
     "deteteCancel": "No",
      "clanName": "Clan Name",
     "clanColor": "Clan Color",
-    "logo": "Logo"
+    "logo": "Logo",
+    "clanNameRequired": "Clan name is required",
+    "clanNameTooShort": "Clan name is too short",
+    "clanNameTooLong": "Clan name is too long",
+     "selectCharacter": "Select a character",
+    "selectColor": "Select a color",
+    "deleteClanTitle": "Delete clan",
+    "deleteClanDescription": "Do you really want to delete this clan?",
+    "selectRace": "Select race",
+    "masterNick": "Leader Nickname",
+    "master": "Leader",
+    "join": "Join"
+    
   },
   "toast": {
     "registrationSuccess": "Registration successful!",
@@ -100,7 +113,8 @@
     "sessionOff": "Session expired. Please log in again.",
     "characterCreated": "Character successfully added!",
     "characterCreateError": "Error adding character!",
-    "deleteChar": "Character successfully deleted."
+    "deleteChar": "Character successfully deleted.",
+    "characterCannotBeLeaderOfTwoClans": "A character cannot be the leader of two clans."
   },
 
   "characters": {

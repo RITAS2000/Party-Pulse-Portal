@@ -1,7 +1,7 @@
 import { selectAccessToken, selectIsAdmin } from '@/redux/auth/selectors';
 import { fetchGallery } from '@/redux/gallery/operation';
 import { selectGalleryItems } from '@/redux/gallery/selectors';
-import { AppDispatch, store } from '@/redux/store';
+import { AppDispatch } from '@/redux/store';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { GalleryItem } from './galleryListItem';

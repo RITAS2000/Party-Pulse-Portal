@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { createCharacter, deleteCharacter, getCharacter } from './operation';
-interface Character {
+import { createCharacter, deleteCharacter, getAllCharacters, getCharacter, getCharacterById } from './operation';
+export interface Character {
   _id: string;
   server: string;
   nickname: string;
@@ -15,8 +15,8 @@ interface CharState {
     server: string;
     nickname: string;
     race: string;
-    level: string;
-    avatar: string;
+    level: number;
+    avatar: string | null;
     clanId: string;
   };
   loading: boolean;
@@ -29,8 +29,8 @@ const initialState: CharState = {
     server: '',
     nickname: '',
     race: '',
-    level: '',
-    avatar: '',
+    level: 1,
+    avatar: null,
     clanId: '',
   },
   loading: false,
@@ -69,7 +69,9 @@ const charSlice = createSlice({
       })
       .addCase(getCharacter.fulfilled, (state, action) => {
         state.loading = false;
-        state.characters = action.payload.characters || [];
+        state.characters = Array.isArray(action.payload)
+    ? action.payload
+    : action.payload.characters || [];
       })
       .addCase(getCharacter.rejected, (state, action) => {
         state.loading = false;
@@ -87,6 +89,32 @@ const charSlice = createSlice({
         state.loading = false;
         state.error = action.payload as string;
       })
+    .addCase(getCharacterById.pending, state => {
+      state.loading = true;
+      state.error = null;
+    })
+    .addCase(getCharacterById.fulfilled, (state, action: PayloadAction<Character>) => {
+  state.loading = false;
+      state.charData = { ...action.payload };
+
+})
+    .addCase(getCharacterById.rejected, (state, action) => {
+      state.loading = false;
+      state.error = action.payload as string;
+    })
+    .addCase(getAllCharacters.pending, state => {
+  state.loading = true;
+  state.error = null;
+})
+.addCase(getAllCharacters.fulfilled, (state, action) => {
+    state.characters = Array.isArray(action.payload)
+        ? action.payload
+        : [];
+})
+.addCase(getAllCharacters.rejected, (state, action) => {
+  state.loading = false;
+  state.error = action.payload as string;
+})
   },
 });
 export const { updateCharacterLevel } = charSlice.actions;
