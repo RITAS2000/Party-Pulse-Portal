@@ -43,11 +43,11 @@ export default function CharItem({ character }: CharacterCardProps) {
         headers: { Authorization: `Bearer ${token}` },
       });
       dispatch(removeFromGallery(galleryItem._id));
-      toast.info('видалено');
+      toast.info(t("toast.removedFromGallery"));
     } else {
       await dispatch(addCharacterToGallery(character._id));
 
-      toast.success('додано');
+      toast.success(t("toast.addedToGallery"));
     }
   };
 

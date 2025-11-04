@@ -22,7 +22,9 @@
       "note": "Якщо щось не зрозуміло, можеш прочитати гайд."
     },
     "notChars": "У тебе ще немає персонажів",
-    "notClans":  "Клани відсутні"
+    "notClans": "Клани відсутні",
+    "galleryTitle": "Галерея персонажів",
+    "galleryEmpty": "До галереї ще не додано персонажів"
   },
   "auth": {
     "login": "Увійти",
@@ -92,13 +94,15 @@
     "clanNameTooShort": "Назва клану занадто коротка",
     "clanNameTooLong": "Назва клану занадто довга",
     "selectCharacter": "Оберіть персонажа",
-    "selectColor": "Виберіть колір",
+    "selectColor": "Оберіть колір",
     "deleteClanTitle": "Видалити клан",
     "deleteClanDescription": "Ви дійсно хочете видалити цей клан?",
     "selectRace": "Виберіть расу",
     "masterNick": "Нік майстра",
     "master": "Майстер",
-     "join": "Вступити"
+    "join": "Вступити",
+    "selectServer": "Оберіть сервер",
+    "clanInfo": "Інформація"
   },
   "toast": {
     "registrationSuccess": "Реєстрація успішна!",
@@ -113,7 +117,14 @@
     "characterCreated": "Персонаж успішно додано!",
     "characterCreateError": "Помилка при додаванні персонажа!",
     "deleteChar": "Персонаж успішно видалений.",
-    "characterCannotBeLeaderOfTwoClans": "Персонаж не може бути лідером двох кланів."
+    "characterCannotBeLeaderOfTwoClans": "Персонаж не може бути лідером двох кланів.",
+    "addedToGallery": "Додано в галерею.",
+    "removedFromGallery": "Видалено з галереї.",
+    "nicknameAlreadyExists": "Персонаж з таким нікнеймом вже існує на цьому сервері.",
+    "characterWrongServer": "Персонаж не може створювати клан на іншому сервері.",
+    "clanNameAlreadyExists": "Клан з такою назвою вже існує на цьому сервері.",
+    "clanSuccess": "Клан успішно створено!",
+    "clanError": "Не вдалося створити клан. Спробуйте ще раз."
   },
   "characters": {
     "druid": "Друїд",
@@ -124,15 +135,15 @@
     "warrior": "Воїн"
   },
   "color": {
-  "red": "Червоний",
-  "blue": "Синій",
-  "green": "Зелений",
-  "yellow": "Жовтий",
-  "purple": "Фіолетовий",
-  "orange": "Помаранчевий",
-  "gray": "Сірий",
-  "pink": "Рожевий",
-  "teal": "Бірюзовий",
-  "indigo": "Індиго"
-}
+    "red": "Червоний",
+    "blue": "Синій",
+    "green": "Зелений",
+    "yellow": "Жовтий",
+    "purple": "Фіолетовий",
+    "orange": "Помаранчевий",
+    "gray": "Сірий",
+    "pink": "Рожевий",
+    "teal": "Бірюзовий",
+    "indigo": "Індиго"
+  }
 }

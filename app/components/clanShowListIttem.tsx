@@ -8,6 +8,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { AppDispatch } from '@/redux/store';
 import { selectUserId } from '@/redux/auth/selectors';
 import { useTranslation } from 'react-i18next';
+import { useRouter } from 'next/navigation';
 
 interface Clan {
   _id: string;
@@ -45,7 +46,11 @@ export function ClanShowListItem({ clan }: ClanShowListItemProps) {
   const colorClass =
     COLOR_OPTIONS[clan.clanColor as keyof typeof COLOR_OPTIONS];
   const userId = useSelector(selectUserId);
-  const isLeader = userId === clan.leaderId;
+    const isLeader = userId === clan.leaderId;
+    const router = useRouter();
+      const handleClick = () => {
+    router.push(`/clan/${clan._id}`);
+  };
 
   return (
     <div
@@ -83,28 +88,28 @@ export function ClanShowListItem({ clan }: ClanShowListItemProps) {
           {t('form.master')}:{' '}
           <span className="font-serif">{clan.leaderCharNick} </span>
         </p>
-        {!isLeader ? (
+      <div className='flex gap-4'>
           <button
-            type="button"
+            type="button" onClick={handleClick}
             className="h-10 px-4 text-white text-xl font-bold flex items-center justify-center rounded border border-black bg-green-700 shadow-[inset_0_0_6px_rgba(0,0,0,1)] hover:bg-blue-700"
           >
-            {t('form.join')}
+            {t('form.clanInfo')}
           </button>
-        ) : (
-          <button
-            type="button"
-            onClick={() =>
-              dispatch(openModal({ type: 'deleteClan', data: clan._id }))
-            }
-            className="w-10 h-10 flex items-center justify-center rounded border border-black bg-red-700 shadow-[inset_0_0_6px_rgba(0,0,0,1)]"
-          >
-            <MdDelete
-              size={26}
-              color="white"
-              className="hover:scale-110 transition-all duration-300"
-            />
-          </button>
-        )}
+              {isLeader &&
+                  <button
+                      type="button"
+                      onClick={() =>
+                          dispatch(openModal({ type: 'deleteClan', data: clan._id }))
+                      }
+                      className="w-10 h-10 flex items-center justify-center rounded border border-black bg-red-700 shadow-[inset_0_0_6px_rgba(0,0,0,1)]"
+                  >
+                      <MdDelete
+                          size={26}
+                          color="white"
+                          className="hover:scale-110 transition-all duration-300"
+                      />
+                  </button>}
+       </div>
       </div>
     </div>
   );

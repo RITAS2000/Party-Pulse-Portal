@@ -14,19 +14,19 @@ import { toast } from 'react-toastify';
 import { useDispatch, useSelector } from 'react-redux';
 import { AppDispatch } from '@/redux/store';
 import { ClockLoader } from 'react-spinners';
-import {selectUserChars } from '@/redux/char/selectors';
+import { selectUserChars } from '@/redux/char/selectors';
 import { createClan, getClans } from '@/redux/clan/operation';
 import { useEffect } from 'react';
 import { getCharacter } from '@/redux/char/operation';
 import { Character } from '@/redux/char/slice';
 import { selectClans, selectClansLoading } from '@/redux/clan/selectors';
-
+import { SERVERS } from './heroAdd';
 
 interface FormValues {
   server: string;
-    clanName: string;
-    charId: string;
-    leaderCharNick: string;
+  clanName: string;
+  charId: string;
+  leaderCharNick: string;
   clanColor: string;
   logo: File | null;
 }
@@ -45,11 +45,9 @@ export const COLOR_OPTIONS = {
 export default function AddClan() {
   const { t } = useTranslation();
   const dispatch = useDispatch<AppDispatch>();
-    const isLoading = useSelector(selectClansLoading);
-    const chars = useSelector(selectUserChars);
-    const clans = useSelector(selectClans);
-
-   
+  const isLoading = useSelector(selectClansLoading);
+  const chars = useSelector(selectUserChars);
+  const clans = useSelector(selectClans);
 
   const clanColorKeys = Object.keys(COLOR_OPTIONS) as Array<
     keyof typeof COLOR_OPTIONS
@@ -63,9 +61,8 @@ export default function AddClan() {
     clanName: Yup.string()
       .min(2, t('form.clanNameTooShort'))
       .max(10, t('form.clanNameTooLong'))
-          .required(t('form.clanNameRequired')),
-     charId: Yup.string().nullable()
-      .required(t('form.nicknameRequired')),
+      .required(t('form.clanNameRequired')),
+    charId: Yup.string().nullable().required(t('form.nicknameRequired')),
 
     clanColor: Yup.string(),
 
@@ -85,58 +82,73 @@ export default function AddClan() {
         );
       }),
   });
-useEffect(() => {
-  dispatch(getCharacter());
-  dispatch(getClans()); 
-}, [dispatch]);
-    
-    
+  useEffect(() => {
+    dispatch(getCharacter());
+    dispatch(getClans());
+  }, [dispatch]);
+
   const initialValues = {
     server: '',
     clanName: '',
-      charId: chars.length > 0 ? chars[0]._id : '',
-    leaderCharNick: "",
-    clanColor: '' ,
-      logo: null,
-    
+    charId: chars.length > 0 ? chars[0]._id : '',
+    leaderCharNick: '',
+    clanColor: '',
+    logo: null,
   };
   //  const handleSubmit =() => {}
   const handleSubmit = async (
     values: FormValues,
     formikHelpers: { resetForm: () => void }
   ) => {
-          const selectedChar: Character  = chars.find(
-  (c: Character) => c._id === (values.charId as string)
-      );  
-   const clanAlreadyExists = clans.some(clan => clan.charId === values.charId);
+    const selectedChar: Character = chars.find(
+      (c: Character) => c._id === (values.charId as string)
+    );
+    const clanAlreadyExists = clans.some(
+  clan => clan.charId === values.charId && clan.server === values.server
+);
 
-    if (clanAlreadyExists) {
-      toast.error(t("toast.characterCannotBeLeaderOfTwoClans"));
-      return;
-    }
+if (clanAlreadyExists) {
+  toast.error(t('toast.characterCannotBeLeaderOfTwoClans'));
+  return;
+}
+
+
+if (selectedChar.server !== values.server) {
+  toast.error(t('toast.characterWrongServer'));
+  return;
+      }
+      const clanNameExists = clans.some(
+  clan =>
+    clan.clanName.toLowerCase() === values.clanName.toLowerCase() &&
+    clan.server === values.server
+);
+
+if (clanNameExists) {
+  toast.error(t('toast.clanNameAlreadyExists'));
+  return;
+}
 
     const response = await fetch('/coffee.png');
     const blob = await response.blob();
     const defaultLogo = new File([blob], 'coffee.png', { type: blob.type });
     const payload = {
       server: values.server,
-        clanName: values.clanName,
-        charId: values.charId,
-       leaderCharNick: selectedChar.nickname,
+      clanName: values.clanName,
+      charId: values.charId,
+      leaderCharNick: selectedChar.nickname,
       clanColor: values.clanColor,
-        logo: values.logo || defaultLogo,
-     
+      logo: values.logo || defaultLogo,
     };
     const resultAction = await dispatch(createClan(payload));
 
     if (createClan.fulfilled.match(resultAction)) {
-      toast.success(t('toast.clan'), {
+      toast.success(t('toast.clanSuccess'), {
         className: 'w-auto text-green-300 font-bold text-lg',
       });
       formikHelpers.resetForm();
-        dispatch(getClans());
+      dispatch(getClans());
     } else {
-      toast.error(t('toast.clan'), {
+      toast.error(t('toast.clanError'), {
         className: 'w-auto text-red-300 font-bold text-lg',
       });
     }
@@ -160,6 +172,52 @@ useEffect(() => {
             <span className="text-gray-700 font-sans font-bold text-xl">
               {t('form.server')}
             </span>
+            <Field name="server">
+              {({ field, form }: FieldProps<FormValues>) => (
+                <>
+                  <Listbox
+                    value={field.value}
+                    onChange={value => form.setFieldValue('server', value)}
+                  >
+                    <div className="relative w-full">
+                      <ListboxButton
+                        className="w-full h-11 text-left py-2 px-6 border outline-none bg-white border-gray-300 rounded hover:border-blue-600 hover:shadow-md
+                                           focus:border-blue-600 transition-all duration-300 text-gray-700"
+                      >
+                        {field.value
+                          ? (field.value as unknown as string)
+                          : t('form.selectServer')}
+                      </ListboxButton>
+
+                      <ListboxOptions anchor="bottom">
+                        {SERVERS.map(server => (
+                          <ListboxOption
+                            key={server}
+                            value={server}
+                            className="w-52 py-2 px-10 border outline-none bg-white border-gray-300 rounded hover:border-blue-600 hover:bg-blue-100 hover:shadow-md
+                                               focus:border-blue-600 transition-all duration-300 text-gray-700"
+                          >
+                            {server}
+                          </ListboxOption>
+                        ))}
+                      </ListboxOptions>
+                    </div>
+                  </Listbox>
+
+                  <ErrorMessage
+                    name="server"
+                    component="span"
+                    className="absolute text-xs left-0 -bottom-3 text-gray-800 font-bold"
+                  />
+                </>
+              )}
+            </Field>
+          </label>
+
+          {/* <label className="relative w-52">
+            <span className="text-gray-700 font-sans font-bold text-xl">
+              {t('form.server')}
+            </span>
             <Field
               type="text"
               name="server"
@@ -173,7 +231,7 @@ useEffect(() => {
               component="span"
               className="absolute text-xs left-0 -bottom-3 text-gray-800 font-bold"
             />
-          </label>
+          </label> */}
 
           <label className="relative w-52">
             <span className="text-gray-700 font-sans font-bold text-xl">
@@ -192,52 +250,59 @@ useEffect(() => {
               component="span"
               className="absolute text-xs left-0 -bottom-3 text-gray-800 font-bold"
             />
-                  </label>
+          </label>
 
+          <label className="relative w-52">
+            <span className="text-gray-700 font-sans font-bold text-xl">
+              {t('form.masterNick')}
+            </span>
 
+            <Field name="charId">
+              {({ field, form }: FieldProps<FormValues>) => {
+                const selectedChar = chars.find(
+                  (c: Character) => c._id === (field.value as unknown as string)
+                );
 
-             <label className="relative w-52">
-  <span className="text-gray-700 font-sans font-bold text-xl">
-    {t('form.masterNick')}
-  </span>
+                return (
+                  <>
+                    <Listbox
+                      value={field.value}
+                      onChange={value => form.setFieldValue('charId', value)}
+                    >
+                      <ListboxButton
+                        className="w-full h-11 text-left py-2 px-6 border outline-none bg-white border-gray-300 rounded hover:border-blue-600 hover:shadow-md
+             focus:border-blue-600 transition-all duration-300 text-gray-700"
+                      >
+                        {selectedChar
+                          ? selectedChar.nickname
+                          : t('form.selectCharacter')}
+                      </ListboxButton>
 
-<Field name="charId">
-  {({ field, form }: FieldProps<FormValues>) => {
-    const selectedChar = chars.find((c: Character) => c._id === (field.value  as unknown as string));
-
-                              return (
-        <>
-      <Listbox
-        value={field.value}
-        onChange={value => form.setFieldValue('charId', value)}
-      >
-        <ListboxButton className="w-full h-11 text-left py-2 px-6 border outline-none bg-white border-gray-300 rounded hover:border-blue-600 hover:shadow-md
-             focus:border-blue-600 transition-all duration-300 text-gray-700">
-          {selectedChar ? selectedChar.nickname : t('form.selectCharacter')}
-        </ListboxButton>
-
-        <ListboxOptions anchor="bottom">
-          {chars.map((char: { _id: string; nickname: string }) => (
-            <ListboxOption
-              key={char._id}
-              value={char._id}
-              className="w-52 py-2 px-10 border outline-none bg-white border-gray-300 rounded hover:border-blue-600 hover:bg-blue-100 hover:shadow-md
+                      <ListboxOptions anchor="bottom">
+                        {chars.map(
+                          (char: { _id: string; nickname: string }) => (
+                            <ListboxOption
+                              key={char._id}
+                              value={char._id}
+                              className="w-52 py-2 px-10 border outline-none bg-white border-gray-300 rounded hover:border-blue-600 hover:bg-blue-100 hover:shadow-md
                focus:border-blue-600 transition-all duration-300 text-gray-700"
-            >
-              {char.nickname}
-            </ListboxOption>
-          ))}
-        </ListboxOptions>
-        </Listbox>
-          <ErrorMessage
-              name="charId"
-              component="span"
-              className="absolute text-xs left-0 -bottom-3 text-gray-800 font-bold"
-            /></>
-    );
-  }}
-</Field>
-</label>
+                            >
+                              {char.nickname}
+                            </ListboxOption>
+                          )
+                        )}
+                      </ListboxOptions>
+                    </Listbox>
+                    <ErrorMessage
+                      name="charId"
+                      component="span"
+                      className="absolute text-xs left-0 -bottom-3 text-gray-800 font-bold"
+                    />
+                  </>
+                );
+              }}
+            </Field>
+          </label>
           <label className="relative w-52">
             <span className="text-gray-700 font-sans font-bold text-xl">
               {t('form.clanColor')}
@@ -249,15 +314,14 @@ useEffect(() => {
                   value={field.value}
                   onChange={value => form.setFieldValue('clanColor', value)}
                 >
-                  <ListboxButton 
-                    
+                  <ListboxButton
                     className="w-full h-11 text-left py-2 px-6 border outline-none bg-white border-gray-300 rounded hover:border-blue-600 hover:shadow-md
                          focus:border-blue-600  transition-all duration-300 text-gray-700"
-                                       onClick={() => {
-   
-  }}
+                    onClick={() => {}}
                   >
-                   {field.value ? t(`color.${field.value}`) : t('form.selectColor')}
+                    {field.value
+                      ? t(`color.${field.value}`)
+                      : t('form.selectColor')}
                   </ListboxButton>
 
                   <ListboxOptions anchor="bottom">
@@ -308,7 +372,7 @@ useEffect(() => {
                         group-hover:border-blue-600 group-hover:shadow-md transition-all duration-300 bg-white"
                   >
                     {(() => {
-                      const file = form.values.logo as File | null; 
+                      const file = form.values.logo as File | null;
 
                       return file ? (
                         <div className="flex items-center space-x-2 text-green-600">

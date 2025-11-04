@@ -25,6 +25,10 @@ interface FormValues {
   avatar: File | null;
 }
 
+export const SERVERS = [
+  "pwclassic",
+  "test",
+];
 export default function HeroForm() {
   const { t } = useTranslation();
   const dispatch = useDispatch<AppDispatch>();
@@ -101,10 +105,19 @@ export default function HeroForm() {
       formikHelpers.resetForm();
       dispatch(getCharacter());
     } else {
-      toast.error(t('toast.characterCreateError'), {
-        className: 'w-auto text-red-300 font-bold text-lg',
-      });
-    }
+      
+        const error = resultAction.payload as string;
+
+      if (error?.includes('400')) {
+        toast.error(t('toast.nicknameAlreadyExists'), {
+          className: 'w-auto text-red-300 font-bold text-lg',
+        });
+      } else {
+        toast.error(t('toast.characterCreateError'), {
+          className: 'w-auto text-red-300 font-bold text-lg',
+        });
+      }
+    } 
   };
 
   return (
@@ -121,7 +134,52 @@ export default function HeroForm() {
           encType="multipart/form-data"
           className="w-auto flex flex-row flex-wrap gap-12 items-end"
         >
-          <label className="relative w-52">
+<label className="relative w-52">
+  <span className="text-gray-700 font-sans font-bold text-xl">
+    {t('form.server')}
+  </span>
+
+  <Field name="server">
+    {({ field, form }: FieldProps<FormValues>) => (
+      <>
+        <Listbox
+          value={field.value}
+          onChange={value => form.setFieldValue('server', value)}
+        >
+          <div className="relative w-full">
+            <ListboxButton
+              className="w-full h-11 text-left py-2 px-6 border outline-none bg-white border-gray-300 rounded hover:border-blue-600 hover:shadow-md
+                         focus:border-blue-600 transition-all duration-300 text-gray-700"
+            >
+              {field.value ? (field.value  as unknown as string) : t('form.selectServer')}
+            </ListboxButton>
+
+            <ListboxOptions anchor="bottom">
+              {SERVERS.map(server => (
+                <ListboxOption
+                  key={server}
+                  value={server}
+                  className="w-52 py-2 px-10 border outline-none bg-white border-gray-300 rounded hover:border-blue-600 hover:bg-blue-100 hover:shadow-md
+                             focus:border-blue-600 transition-all duration-300 text-gray-700"
+                >
+                  {server}
+                </ListboxOption>
+              ))}
+            </ListboxOptions>
+          </div>
+        </Listbox>
+
+        <ErrorMessage
+          name="server"
+          component="span"
+          className="absolute text-xs left-0 -bottom-3 text-gray-800 font-bold"
+        />
+      </>
+    )}
+  </Field>
+</label>
+
+          {/* <label className="relative w-52">
             <span className="text-gray-700 font-sans font-bold text-xl">
               {t('form.server')}
             </span>
@@ -138,7 +196,7 @@ export default function HeroForm() {
               component="span"
               className="absolute text-xs left-0 -bottom-3 text-gray-800 font-bold"
             />
-          </label>
+          </label> */}
 
           <label className="relative w-52">
             <span className="text-gray-700 font-sans font-bold text-xl">
@@ -149,7 +207,7 @@ export default function HeroForm() {
               name="nickname"
               minLength={2}
               maxLength={10}
-              className="w-full h-11 py-2 px-10 border border-gray-300 rounded hover:border-blue-600 hover:shadow-md
+              className="w-full h-11 py-2 px-6 border border-gray-300 rounded hover:border-blue-600 hover:shadow-md
                        focus:border-blue-600 transition-all duration-300 text-gray-700"
             />
             <ErrorMessage
@@ -173,7 +231,7 @@ export default function HeroForm() {
                 >
                   <div className="relative w-full">
                     <ListboxButton
-                      className="w-full h-11 text-left py-2 px-10 border outline-none bg-white border-gray-300 rounded hover:border-blue-600 hover:shadow-md
+                      className="w-full h-11 text-left py-2 px-6 border outline-none bg-white border-gray-300 rounded hover:border-blue-600 hover:shadow-md
                          focus:border-blue-600 transition-all duration-300 text-gray-700"
                     >
                       {field.value
@@ -186,7 +244,7 @@ export default function HeroForm() {
                         <ListboxOption
                           key={key}
                           value={key}
-                          className="w-52 py-2 px-10 border outline-none bg-white border-gray-300 rounded hover:border-blue-600 hover:bg-blue-100 hover:shadow-md
+                          className="w-52 py-2 px-6 border outline-none bg-white border-gray-300 rounded hover:border-blue-600 hover:bg-blue-100 hover:shadow-md
                          focus:border-blue-600 transition-all duration-300 text-gray-700"
                         >
                           {t(`characters.${key}`)}
@@ -219,7 +277,7 @@ export default function HeroForm() {
                 if (target.value.length > 3)
                   target.value = target.value.slice(0, 3); 
               }}
-              className="w-full h-11 py-2 px-10 border border-gray-300 rounded  hover:border-blue-600 hover:shadow-md
+              className="w-full h-11 py-2 px-6 border border-gray-300 rounded  hover:border-blue-600 hover:shadow-md
                       focus:border-blue-600 transition-all duration-300 text-gray-700"
             />
             <ErrorMessage
@@ -259,7 +317,7 @@ export default function HeroForm() {
                         group-hover:border-blue-600 group-hover:shadow-md transition-all duration-300 bg-white"
                   >
                     {(() => {
-                      const file = form.values.avatar as File | null; // 👈 чітко вказуємо тип
+                      const file = form.values.avatar as File | null;
 
                       return file ? (
                         <div className="flex items-center space-x-2 text-green-600">

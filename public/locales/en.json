@@ -22,7 +22,9 @@
       "note": "If something is unclear, you can read the guide."
     },
     "notChars": "You don’t have any characters yet",
-    "notClans":  "Clans are absent"
+    "notClans": "Clans are absent",
+    "galleryTitle": "Character Gallery",
+    "galleryEmpty": "No characters have been added to the gallery yet"
   },
   "auth": {
     "login": "Login",
@@ -85,21 +87,22 @@
     "deleteDescription": "Are you sure you want to delete this character?",
     "deleteConfirm": "Yes",
     "deteteCancel": "No",
-     "clanName": "Clan Name",
+    "clanName": "Clan Name",
     "clanColor": "Clan Color",
     "logo": "Logo",
     "clanNameRequired": "Clan name is required",
     "clanNameTooShort": "Clan name is too short",
     "clanNameTooLong": "Clan name is too long",
-     "selectCharacter": "Select a character",
+    "selectCharacter": "Select a character",
     "selectColor": "Select a color",
     "deleteClanTitle": "Delete clan",
     "deleteClanDescription": "Do you really want to delete this clan?",
     "selectRace": "Select race",
     "masterNick": "Leader Nickname",
     "master": "Leader",
-    "join": "Join"
-    
+    "join": "Join",
+    "selectServer": "Select a server",
+    "clanInfo": "Information"
   },
   "toast": {
     "registrationSuccess": "Registration successful!",
@@ -114,7 +117,14 @@
     "characterCreated": "Character successfully added!",
     "characterCreateError": "Error adding character!",
     "deleteChar": "Character successfully deleted.",
-    "characterCannotBeLeaderOfTwoClans": "A character cannot be the leader of two clans."
+    "characterCannotBeLeaderOfTwoClans": "A character cannot be the leader of two clans.",
+    "addedToGallery": "Added to gallery.",
+    "removedFromGallery": "Removed from gallery.",
+    "nicknameAlreadyExists": "A character with this nickname already exists on this server.",
+    "characterWrongServer": "The character cannot create a clan on another server.",
+    "clanNameAlreadyExists": "A clan with this name already exists on this server.",
+    "clanSuccess": "Clan created successfully!",
+    "clanError": "Failed to create clan. Please try again."
   },
 
   "characters": {
@@ -126,17 +136,15 @@
     "warrior": "Warrior"
   },
   "color": {
-   
-  "red": "Red",
-  "blue": "Blue",
-  "green": "Green",
-  "yellow": "Yellow",
-  "purple": "Purple",
-  "orange": "Orange",
-  "gray": "Gray",
-  "pink": "Pink",
-  "teal": "Teal",
-  "indigo": "Indigo"
-
+    "red": "Red",
+    "blue": "Blue",
+    "green": "Green",
+    "yellow": "Yellow",
+    "purple": "Purple",
+    "orange": "Orange",
+    "gray": "Gray",
+    "pink": "Pink",
+    "teal": "Teal",
+    "indigo": "Indigo"
   }
 }

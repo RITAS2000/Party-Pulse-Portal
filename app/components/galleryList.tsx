@@ -6,13 +6,15 @@ import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { GalleryItem } from './galleryListItem';
 import axios from 'axios';
+import { useTranslation } from 'react-i18next';
 
 
 
 
 export default function GalleryList() {
   const dispatch = useDispatch<AppDispatch>();
-  const isAdmin = useSelector(selectIsAdmin);
+    const isAdmin = useSelector(selectIsAdmin);
+    const { t } = useTranslation();
     const galleryItems = useSelector(selectGalleryItems);
      
         const token = useSelector(selectAccessToken)
@@ -30,12 +32,18 @@ export default function GalleryList() {
         headers: { Authorization: `Bearer ${token}` } 
       });
       dispatch(fetchGallery());
-
+    };
+    
+      if (filteredGalleryCars.length === 0) {
+    return (
+      <p className="text-xl text-gray-400 pl-12 pt-4">{t('page.galleryEmpty')}</p>
+    );
+  }
+    
    
-  };
   return (
     <div>
-          <h1>галерея персонажей</h1>
+       
           <ul className="flex flex-row flex-wrap gap-7 px-8 py-4">
               {filteredGalleryCars.map(item => (
                   <li key={item._id}><GalleryItem
