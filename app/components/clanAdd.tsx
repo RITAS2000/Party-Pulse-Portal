@@ -64,7 +64,7 @@ export default function AddClan() {
       .required(t('form.clanNameRequired')),
     charId: Yup.string().nullable().required(t('form.nicknameRequired')),
 
-    clanColor: Yup.string(),
+    clanColor: Yup.string().required(t('form.colorRequired')),
 
     logo: Yup.mixed()
       .nullable()
@@ -194,7 +194,7 @@ if (clanNameExists) {
                           <ListboxOption
                             key={server}
                             value={server}
-                            className="w-52 py-2 px-10 border outline-none bg-white border-gray-300 rounded hover:border-blue-600 hover:bg-blue-100 hover:shadow-md
+                            className="w-52 py-2 px-6 border outline-none bg-white border-gray-300 rounded hover:border-blue-600 hover:bg-blue-100 hover:shadow-md
                                                focus:border-blue-600 transition-all duration-300 text-gray-700"
                           >
                             {server}
@@ -214,24 +214,7 @@ if (clanNameExists) {
             </Field>
           </label>
 
-          {/* <label className="relative w-52">
-            <span className="text-gray-700 font-sans font-bold text-xl">
-              {t('form.server')}
-            </span>
-            <Field
-              type="text"
-              name="server"
-              minLength={2}
-              maxLength={16}
-              className="w-full h-11 py-2 px-6 border border-gray-300 rounded hover:border-blue-600 hover:shadow-md
-                       focus:border-blue-600 transition-all duration-300 text-gray-700"
-            />
-            <ErrorMessage
-              name="server"
-              component="span"
-              className="absolute text-xs left-0 -bottom-3 text-gray-800 font-bold"
-            />
-          </label> */}
+    
 
           <label className="relative w-52">
             <span className="text-gray-700 font-sans font-bold text-xl">
@@ -284,7 +267,7 @@ if (clanNameExists) {
                             <ListboxOption
                               key={char._id}
                               value={char._id}
-                              className="w-52 py-2 px-10 border outline-none bg-white border-gray-300 rounded hover:border-blue-600 hover:bg-blue-100 hover:shadow-md
+                              className="w-52 py-2 px-6 border outline-none bg-white border-gray-300 rounded hover:border-blue-600 hover:bg-blue-100 hover:shadow-md
                focus:border-blue-600 transition-all duration-300 text-gray-700"
                             >
                               {char.nickname}
@@ -310,6 +293,7 @@ if (clanNameExists) {
 
             <Field name="clanColor">
               {({ field, form }: FieldProps<FormValues>) => (
+                <>
                 <Listbox
                   value={field.value}
                   onChange={value => form.setFieldValue('clanColor', value)}
@@ -337,6 +321,11 @@ if (clanNameExists) {
                     ))}
                   </ListboxOptions>
                 </Listbox>
+                   <ErrorMessage
+                      name="clanColor"
+                      component="span"
+                      className="absolute text-xs left-0 -bottom-3 text-gray-800 font-bold"
+                    /></>
               )}
             </Field>
           </label>

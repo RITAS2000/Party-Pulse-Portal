@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { createCharacter, deleteCharacter, getAllCharacters, getCharacter, getCharacterById } from './operation';
+import { createCharacter, deleteCharacter, getAllCharacters, getCharacter, getCharacterById, getFreeChars } from './operation';
 export interface Character {
   _id: string;
   server: string;
@@ -7,7 +7,12 @@ export interface Character {
   race: string;
   level: number;
   avatar: string | null;
-  clanId: string;
+  clan: {
+    clanId: string,
+    role: string,
+    accepted: boolean,
+    
+  };
 }
 interface CharState {
   charData: {
@@ -17,11 +22,17 @@ interface CharState {
     race: string;
     level: number;
     avatar: string | null;
-    clanId: string;
+     clan: {
+    clanId: string,
+    role: string,
+    accepted: boolean,
+    
+  };
   };
   loading: boolean;
   error: string | null;
   characters: Character[];
+  freeChars: Character[];
 }
 const initialState: CharState = {
   charData: {
@@ -31,11 +42,18 @@ const initialState: CharState = {
     race: '',
     level: 1,
     avatar: null,
+     clan: {
     clanId: '',
+    role: "member",
+    accepted: false,
+    
+  },
   },
   loading: false,
   error: null,
   characters: [],
+  freeChars: [],
+
 };
 
 const charSlice = createSlice({
@@ -114,7 +132,17 @@ const charSlice = createSlice({
 .addCase(getAllCharacters.rejected, (state, action) => {
   state.loading = false;
   state.error = action.payload as string;
-})
+})  .addCase(getFreeChars.pending, (state) => {
+        state.loading = true;
+      })
+      .addCase(getFreeChars.fulfilled, (state, action) => {
+        state.loading = false;
+        state.freeChars = action.payload;
+      })
+      .addCase(getFreeChars.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload as string;
+      });
   },
 });
 export const { updateCharacterLevel } = charSlice.actions;

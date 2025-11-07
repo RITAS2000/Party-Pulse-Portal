@@ -1,6 +1,8 @@
 "use client"
 import AddClan from "@/app/components/clanAdd";
 import ClanShowList from "@/app/components/clanShowList";
+import HiUser from "@/app/components/hiUser";
+import UlTextClan from "@/app/components/ulTextClan";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { FaCheck } from 'react-icons/fa6';
@@ -10,7 +12,11 @@ import { HiOutlineViewGridAdd } from "react-icons/hi";
 export default function Page() {
     const { t } = useTranslation();
      const [isOpen, setIsOpen] = useState(false);
-    return <main className="pl-80 pt-60 min-w-screen min-h-screen   ">
+    return <main className="pl-80 pt-40 min-w-screen min-h-screen   ">
+        <div className='pl-32'>
+                <HiUser />
+            <UlTextClan />
+            </div>
            <div className="flex gap-4 items-center">
                 <h3 className="pl-12 mb-2 font-serif text-2xl font-bold text-red-800">
                   {t('page.addClan')}

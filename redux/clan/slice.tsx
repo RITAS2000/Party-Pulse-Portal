@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { createClan, deleteClan, getClans } from './operation';
+import { createClan, deleteClan, fetchClanMessage, getClanById, getClans } from './operation';
 import { ClanColor } from './colors';
 
 export interface Clan {
@@ -13,13 +13,16 @@ export interface Clan {
   leaderId: string;
   members: string[];
   clanChars: string[];
+  message: string;
+    
 }
 
 interface ClanState {
   clanData: Clan;
   loading: boolean;
   error: string | null;
-  clans: Clan[];
+    clans: Clan[];
+    currentClan: Clan | null,
 }
 
 const initialState: ClanState = {
@@ -32,19 +35,27 @@ const initialState: ClanState = {
     clanColor: 'gray',
     logo: '',
     leaderId: '',
-    members: [],
+        members: [],
     clanChars: [],
+    message: "",
+    
   },
   loading: false,
   error: null,
-  clans: [],
+    clans: [],
+    currentClan: null,
 };
 
 const clanSlice = createSlice({
   name: 'clan',
   initialState,
 
-  reducers: {},
+  reducers: {updateMessage: (state, action) => {
+  const { clanId, message } = action.payload;
+  state.clans = state.clans.map(clan =>
+    clan._id === clanId ? { ...clan, message } : clan
+  );
+}},
   extraReducers: builder => {
     builder
       .addCase(createClan.pending, state => {
@@ -82,7 +93,27 @@ const clanSlice = createSlice({
       .addCase(deleteClan.rejected, (state, action) => {
         state.loading = false;
         state.error = action.payload as string;
-      });
+      }).addCase(getClanById.pending, state => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(getClanById.fulfilled, (state, action) => {
+        state.loading = false;
+        state.currentClan = action.payload;
+      })
+      .addCase(getClanById.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload as string;
+      })
+    .addCase(fetchClanMessage.fulfilled, (state, action) => {
+  const { clanId, message } = action.payload;
+  const clan = state.clans.find(c => c._id === clanId);
+  if (clan) clan.message = message;
+
+  if (state.currentClan && state.currentClan._id === clanId) {
+    state.currentClan.message = message;
+  }
+});;
   },
 });
 

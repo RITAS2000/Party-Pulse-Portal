@@ -1,6 +1,7 @@
 import axios from "axios";
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { store } from '../store';
+import { Clan } from "./slice";
 
 export const createClan = createAsyncThunk(
   'auth/addClan',
@@ -83,6 +84,112 @@ export const deleteClan = createAsyncThunk<
         return thunkAPI.rejectWithValue(error.message || "Delete error");
       }
       return thunkAPI.rejectWithValue("Delete error");
+    }
+  }
+);
+
+
+export const getClanById = createAsyncThunk<
+  Clan, 
+  string, 
+  { rejectValue: string }
+>(
+  "clan/getClanById",
+  async (clanId, thunkAPI) => {
+    
+    const state = thunkAPI.getState() as ReturnType<typeof store.getState>;
+    const token = state.auth?.accessToken;
+
+    try {
+      const response = await axios.get(`/party/clan/${clanId}`, {
+          headers: {
+              Authorization: `Bearer ${token}`,
+        }
+      });
+      return response.data; 
+    } catch (error: unknown) {
+      if (axios.isAxiosError(error)) {
+        return thunkAPI.rejectWithValue(error.message || "Delete error");
+      }
+      return thunkAPI.rejectWithValue("Delete error");
+    }
+  }
+);
+
+
+export const upsertClanMessage = createAsyncThunk(
+  'clan/upsertMessage',
+  async (payload: { clanId: string; message: string }, thunkAPI) => {
+    const state = thunkAPI.getState() as ReturnType<typeof store.getState>;
+    const token = state.auth.accessToken;
+
+    try {
+      const response = await axios.patch('/party/clan/add-message', payload, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+
+      console.log('📦 Дані з сервера:', response.data);
+      return response.data.message;
+    } catch (error: unknown) {
+      if (axios.isAxiosError(error)) {
+        return thunkAPI.rejectWithValue(error.message || 'Upsert error');
+      }
+      return thunkAPI.rejectWithValue('Upsert error');
+    }
+  }
+);
+
+
+export const fetchClanMessage = createAsyncThunk(
+  'clan/fetchMessage',
+  async (clanId: string, thunkAPI) => {
+    const state = thunkAPI.getState() as ReturnType<typeof store.getState>;
+    const token = state.auth.accessToken;
+
+    try {
+      const response = await axios.get(`/party/clan/${clanId}/message`, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+
+      console.log('📦 Дані з сервера:', response.data);
+      return response.data.message;
+    } catch (error: unknown) {
+      if (axios.isAxiosError(error)) {
+        return thunkAPI.rejectWithValue(error.message || 'Fetch error');
+      }
+      return thunkAPI.rejectWithValue('Fetch error');
+    }
+  }
+);
+interface AddCharPayload {
+  charId: string;
+  clanId: string;
+}
+export const addCharToClan = createAsyncThunk(
+  'clan/addChar',
+  async (payload: AddCharPayload, thunkAPI) => {
+    const state = thunkAPI.getState() as ReturnType<typeof store.getState>;
+    const token = state.auth.accessToken;
+
+    try {
+      const response = await axios.patch(
+        `/party/clan/add-char`,
+        {
+          charId: payload.charId,
+          clanId: payload.clanId,
+        },
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        }
+      );
+
+      console.log('📦 Дані з сервера:', response.data);
+      return response.data.message; // "Character added to clan successfully!" або твій тост
+    } catch (error: unknown) {
+      if (axios.isAxiosError(error)) {
+        return thunkAPI.rejectWithValue(error.response?.data?.message || 'Add character error');
+      }
+      return thunkAPI.rejectWithValue('Add character error');
     }
   }
 );

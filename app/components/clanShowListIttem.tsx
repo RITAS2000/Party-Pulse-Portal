@@ -54,7 +54,7 @@ export function ClanShowListItem({ clan }: ClanShowListItemProps) {
 
   return (
     <div
-      className={`${colorClass} w-[500px] h-auto p-4 rounded-xl flex flex-col border border-solid shadow-[inset_0_0_6px_rgba(0,0,0,1)] hover:scale-100 hover:bg-green-300 transition-all duration-300`}
+      className={`${colorClass} w-[470px] h-auto p-4 rounded-xl flex flex-col border border-solid shadow-[inset_0_0_6px_rgba(0,0,0,1)] hover:scale-100 hover:bg-green-300 transition-all duration-300`}
     >
       <div className="flex items-center justify-between mb-2">
         <div className="rounded-full overflow-hidden mr-4 w-[54px] h-[54px] bg-black shadow-[0_0_6px_rgba(255,255,255,1)]">

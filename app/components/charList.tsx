@@ -17,6 +17,12 @@ export type CharacterType = {
   level: number;
   avatar: string | null;
   galleryId?: string;
+   clan: {
+    clanId: string,
+    role: string,
+    accepted: boolean,
+    
+  };
 };
 
 export default function CharList() {

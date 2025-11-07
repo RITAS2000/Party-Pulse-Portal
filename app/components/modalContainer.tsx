@@ -22,7 +22,7 @@ export default function ReModalContainer() {
   return (
     <ReUseModal>
       {type === "forgot" && <ModalForgotPassword />}
-      {type === "deleteChar" && <ModalDeleteChar charId={data} />}
+      {type === "deleteChar" && <ModalDeleteChar {...data} />}
       {type === "deleteClan" && <ModalDeleteClan clanId={data} />}
      </ReUseModal>
   );

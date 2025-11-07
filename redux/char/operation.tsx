@@ -126,3 +126,30 @@ export const getAllCharacters = createAsyncThunk<
     }
   }
 );
+
+
+
+export const getFreeChars = createAsyncThunk<
+  Character[],  
+  string,         
+  { rejectValue: string } 
+>(
+  "char/getFreeChars",
+  async (server, thunkAPI) => {
+    const state = thunkAPI.getState() as ReturnType<typeof store.getState>;
+    const token = state.auth.accessToken;
+
+    try {
+      const response = await axios.get(`/party/char/free?server=${server}`, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+
+      return response.data; // ✅ масив персонажів без клану
+    } catch (error: unknown) {
+      if (axios.isAxiosError(error)) {
+        return thunkAPI.rejectWithValue(error.message || "Get free chars error");
+      }
+      return thunkAPI.rejectWithValue("Get free chars error");
+    }
+  }
+);

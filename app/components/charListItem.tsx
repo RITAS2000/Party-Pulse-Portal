@@ -138,7 +138,7 @@ export default function CharItem({ character }: CharacterCardProps) {
         <button
           type="button"
           onClick={() =>
-            dispatch(openModal({ type: 'deleteChar', data: character._id }))
+            dispatch(openModal({ type: 'deleteChar', data: {charId: character._id, role: character.clan.role } }))
           }
           className="w-10 h-10 flex items-center justify-center rounded border-solid border border-black bg-red-700 shadow-[inset_0_0_6px_rgba(0,0,0,1)]"
         >

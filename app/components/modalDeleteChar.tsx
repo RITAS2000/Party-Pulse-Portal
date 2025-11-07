@@ -10,14 +10,19 @@ import { useTranslation } from 'react-i18next';
 
 type ModalDeleteCharProps = {
   charId: string;
+  role: string;
 };
 
-export default function ModalDeleteChar({ charId }: ModalDeleteCharProps) {
+export default function ModalDeleteChar({ charId , role}: ModalDeleteCharProps) {
   const isLoading = useSelector(selectIsLoading);
   const dispatch = useDispatch<AppDispatch>();
   const { t } = useTranslation();
 
-    const handleDelete = () => {
+  const handleDelete = () => {
+        if (role === "leader") {
+    toast.error(t("toast.leaderDeleteError"));
+    return;
+  }
     dispatch(deleteCharacter(charId));
     dispatch(closeModal());
     toast.success(t("toast.deleteChar"));

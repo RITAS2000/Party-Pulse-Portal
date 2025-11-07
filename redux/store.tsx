@@ -41,6 +41,7 @@ const rootPersistConfig = {
 };
 
 const rootReducer = combineReducers({
+ 
   clan: clanReducer,
   gallery: galleryReducer,
   char: charReducer,

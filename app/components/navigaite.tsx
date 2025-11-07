@@ -16,24 +16,21 @@ export default function Navigate() {
                   <SidebarItem pathname="/">
                     {t("sidebar.navOne")}
                 </SidebarItem>
+                    {isLoggedIn && (
+                    <SidebarItem pathname={`/hero/${userId}`} >
+                    {t("sidebar.heroes")}
+                    </SidebarItem>)}
                 {isLoggedIn && (
                <SidebarItem pathname="/clan/create">
-                    Трон Кланів
+                  {t("sidebar.clans")}
                 </SidebarItem>)}
-                
-                {isLoggedIn && (
-                    <SidebarItem pathname={`/hero/${userId}`} >
-                     Персонажи
-                    </SidebarItem>)}
-                 <SidebarItem pathname="/portal">
-                    GvG Портал
-                </SidebarItem>
+             
                 <SidebarItem pathname="/gallery">
-                    Галерея
+                  {t("sidebar.gallery")}
                 </SidebarItem>
                 {isAdmin && (
                 <SidebarItem pathname="/admin">
-                        Admin Page
+                       {t("sidebar.admin")}
                     </SidebarItem>
                 )}
                 </ul>

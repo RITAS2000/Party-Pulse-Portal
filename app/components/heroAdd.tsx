@@ -77,7 +77,7 @@ export default function HeroForm() {
     server: '',
     nickname: '',
     race: '',
-    level: 0,
+    level: 1,
     avatar: null,
   };
 
@@ -144,7 +144,8 @@ export default function HeroForm() {
       <>
         <Listbox
           value={field.value}
-          onChange={value => form.setFieldValue('server', value)}
+                    onChange={value => form.setFieldValue('server', value)}
+                    
         >
           <div className="relative w-full">
             <ListboxButton
@@ -159,7 +160,7 @@ export default function HeroForm() {
                 <ListboxOption
                   key={server}
                   value={server}
-                  className="w-52 py-2 px-10 border outline-none bg-white border-gray-300 rounded hover:border-blue-600 hover:bg-blue-100 hover:shadow-md
+                  className="w-52 py-2 px-6 border outline-none bg-white border-gray-300 rounded hover:border-blue-600 hover:bg-blue-100 hover:shadow-md
                              focus:border-blue-600 transition-all duration-300 text-gray-700"
                 >
                   {server}
@@ -179,25 +180,6 @@ export default function HeroForm() {
   </Field>
 </label>
 
-          {/* <label className="relative w-52">
-            <span className="text-gray-700 font-sans font-bold text-xl">
-              {t('form.server')}
-            </span>
-            <Field
-              type="text"
-              name="server"
-              minLength={2}
-              maxLength={16}
-              className="w-full h-11 py-2 px-10 border border-gray-300 rounded hover:border-blue-600 hover:shadow-md
-                       focus:border-blue-600 transition-all duration-300 text-gray-700"
-            />
-            <ErrorMessage
-              name="server"
-              component="span"
-              className="absolute text-xs left-0 -bottom-3 text-gray-800 font-bold"
-            />
-          </label> */}
-
           <label className="relative w-52">
             <span className="text-gray-700 font-sans font-bold text-xl">
               {t('form.nickname')}
@@ -205,6 +187,7 @@ export default function HeroForm() {
             <Field
               type="text"
               name="nickname"
+              
               minLength={2}
               maxLength={10}
               className="w-full h-11 py-2 px-6 border border-gray-300 rounded hover:border-blue-600 hover:shadow-md
@@ -213,6 +196,7 @@ export default function HeroForm() {
             <ErrorMessage
               name="nickname"
               component="span"
+              
               className="absolute text-xs left-0 -bottom-3 text-gray-800 font-bold"
             />
           </label>

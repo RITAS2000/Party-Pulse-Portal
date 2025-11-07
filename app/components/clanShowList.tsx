@@ -32,7 +32,7 @@ export default function ClanShowList() {
   }
     return (
         
-        <ul className="mt-4 mx-6 flex flex-wrap justify-between ">
+        <ul className="mt-4 mx-6 flex flex-wrap justify-around ">
             {reversedClans.map(clan => (<li key={clan._id} >
                 <ClanShowListItem clan={clan} />
             </li>))}

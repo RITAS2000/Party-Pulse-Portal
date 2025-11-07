@@ -1,7 +1,11 @@
 {
   "sidebar": {
     "coffee": "Buy me a coffee",
-    "navOne": "Central Hall"
+    "navOne": "Portal",
+    "heroes": "Characters",
+    "clans": "Clans",
+    "gallery": "Gallery",
+    "admin": "Admin Page"
   },
   "header": {
     "welcome": "Welcome to Party Pulse Portal",
@@ -24,7 +28,20 @@
     "notChars": "You don’t have any characters yet",
     "notClans": "Clans are absent",
     "galleryTitle": "Character Gallery",
-    "galleryEmpty": "No characters have been added to the gallery yet"
+    "galleryEmpty": "No characters have been added to the gallery yet",
+    "clan": "The Page of the Clan",
+  "clansPage": {
+    "create": "This is the clans page. Here you can create your own clan:",
+    "note": "note that one character can be the leader of only one clan and only on their own server;",
+    "info": "you can also view information about any clan by clicking the “Information” button;",
+    "delete": "only the clan leader can delete their clan.",
+    "clanAbout": "About the clan:",
+    "clanInfoNotAdded": "Clan information has not been added yet.",
+    "editInfo": "Edit clan information",
+    "writeDescription": "Write a clan description",
+    "edit": "Edit"
+  }
+ 
   },
   "auth": {
     "login": "Login",
@@ -83,6 +100,7 @@
     "serverTooShort": "Server name is too short",
     "serverTooLong": "Server name is too long",
     "serverRequired": "Server name is required",
+    "colorRequired": "Clan color is required",
     "deleteTitle": "Delete Character",
     "deleteDescription": "Are you sure you want to delete this character?",
     "deleteConfirm": "Yes",
@@ -102,7 +120,14 @@
     "master": "Leader",
     "join": "Join",
     "selectServer": "Select a server",
-    "clanInfo": "Information"
+    "clanInfo": "Information",
+    "enterName": "Enter name",
+    "enterNick": "Enter nickname",
+    "clanJoinInfo": "To join the clan, select a character, click 'Join', and wait for the clan master's approval.",
+  "joinBtn": "Join",
+  "max2000": "Maximum 2000 characters",
+  "noFreeChars": "No free characters available"
+
   },
   "toast": {
     "registrationSuccess": "Registration successful!",
@@ -124,7 +149,12 @@
     "characterWrongServer": "The character cannot create a clan on another server.",
     "clanNameAlreadyExists": "A clan with this name already exists on this server.",
     "clanSuccess": "Clan created successfully!",
-    "clanError": "Failed to create clan. Please try again."
+    "clanError": "Failed to create clan. Please try again.",
+    "deleteClan": "Clan deleted successfully!",
+    "deleteClanError": "Failed to delete clan.",
+    "leaderDeleteError": "Transfer the leader role to another member before deleting this character.",
+    "infoAdded": "Information added.",
+    "editError": "Error while editing."
   },
 
   "characters": {
