@@ -1,6 +1,6 @@
-import { getFreeChars } from '@/redux/char/operation';
-import { selectFreeChars, selectIsLoading } from '@/redux/char/selectors';
-import { Character } from '@/redux/char/slice';import { addCharToClan } from '@/redux/clan/operation';
+import { getAllCharacters, getFreeChars } from '@/redux/char/operation';
+import { selectFreeChars} from '@/redux/char/selectors';
+import { Character, removeFreeChar } from '@/redux/char/slice';import { addCharToClan } from '@/redux/clan/operation';
 ;
 import { Clan } from '@/redux/clan/slice';
 import { AppDispatch } from '@/redux/store';
@@ -11,12 +11,12 @@ import {
   ListboxOptions,
 } from '@headlessui/react';
 import { Form, Formik, Field, FieldProps } from 'formik';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
 import { ClockLoader } from 'react-spinners';
 import { toast } from 'react-toastify';
-// import clsx from 'clsx';
+
 
 
 
@@ -27,8 +27,9 @@ interface AddToClanFormProps {
 export default function AddToClanForm({ currentClan }: AddToClanFormProps) {
   const dispatch = useDispatch<AppDispatch>();
   const chars = useSelector(selectFreeChars);
-  const isLoading = useSelector(selectIsLoading);
+
   const { t } = useTranslation();
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
 
   useEffect(() => {
@@ -36,11 +37,27 @@ export default function AddToClanForm({ currentClan }: AddToClanFormProps) {
       dispatch(getFreeChars(currentClan.server));
     }
   }, [dispatch, currentClan]);
-  const handleAddChar = async () => {
-     if (!currentClan?._id) return;
-  const resultAction = await dispatch(addCharToClan({ charId: chars._id, clanId: currentClan._id }));
+
+
+
+  
+  const handleAddChar = async (values: { char: string }, formikHelpers: { resetForm: () => void }) => {
+if (!currentClan?._id) return;
+  if (!values.char) {
+    toast.error(t("form.noFreeChars"));
+    return;
+  }
+ setIsSubmitting(true); 
+  const resultAction = await dispatch(addCharToClan({ charId: values.char, clanId: currentClan._id }));
+  setIsSubmitting(false);
   if (addCharToClan.fulfilled.match(resultAction)) {
-    toast.success(t('clan.charQueued'));
+    toast.success(t('toast.charQueued'));
+    formikHelpers.resetForm();
+    dispatch(removeFreeChar(values.char));
+     dispatch(getAllCharacters());
+   
+   
+  
   } else {
     toast.error(resultAction.payload as string || t('clan.addCharError'));
   }
@@ -50,13 +67,13 @@ export default function AddToClanForm({ currentClan }: AddToClanFormProps) {
     <div className='flex  w-[800px] py-12 px-12 gap-12 '>
       
       
-      <p className='text-gray-700'>{t("form.clanJoinInfo")}</p>
+      <p className="text-lg font-bold text-gray-700">{t("form.clanJoinInfo")}</p>
        
     <Formik
       initialValues={{ char: '' }}
       onSubmit={handleAddChar}
     >
-      <Form className="w-auto flex flex-row flex-wrap gap-8">
+      <Form className="w-auto h-[100px] flex flex-row flex-wrap gap-8">
         <label className="relative w-52">
         
           <Field name="char">
@@ -101,10 +118,10 @@ export default function AddToClanForm({ currentClan }: AddToClanFormProps) {
         </label>
         <button
           type="submit"
-           className={`font-bold w-52 h-11 text-xl px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700  transition-colors duration-300`}
+           className=" flex  items-center justify-center font-bold w-52 h-11 text-xl px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700  transition-colors duration-300"
         >
-          {isLoading ? (
-            <ClockLoader size={30} color="white" />
+          {isSubmitting ? (
+            <ClockLoader size={24} color="white" />
           ) : (
             t('form.joinBtn')
           )}

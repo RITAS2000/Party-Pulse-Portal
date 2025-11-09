@@ -11,15 +11,20 @@ import { selectClansLoading } from '@/redux/clan/selectors';
 
 type ModalDeleteClanProps = {
   clanId: string;
+  clanChars: string[];
 };
 
-export default function ModalDeleteClan({ clanId }: ModalDeleteClanProps) {
+export default function ModalDeleteClan({ clanId, clanChars }: ModalDeleteClanProps) {
   const isLoading = useSelector(selectClansLoading);
   const dispatch = useDispatch<AppDispatch>();
   const { t } = useTranslation();
 
- const handleDelete = async () => {
-
+  const handleDelete = async () => {
+   
+   if (clanChars.length > 1) {
+     toast.error(t("toast.clanHasMultipleMembers"));
+     return;
+   }
     const resultAction = await dispatch(deleteClan(clanId));
     
     if (deleteClan.fulfilled.match(resultAction)) {

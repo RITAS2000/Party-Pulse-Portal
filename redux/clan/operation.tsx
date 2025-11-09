@@ -193,3 +193,66 @@ export const addCharToClan = createAsyncThunk(
     }
   }
 );
+interface AcceptCharPayload {
+  charId: string;
+  clanId: string;
+}
+export const acceptCharToClan = createAsyncThunk(
+  'clan/acceptChar',
+  async (payload: AcceptCharPayload, thunkAPI) => {
+    const state = thunkAPI.getState() as ReturnType<typeof store.getState>;
+    const token = state.auth.accessToken;
+
+    try {
+      const response = await axios.patch(
+        `/party/clan/accept-char`,
+        {
+          charId: payload.charId,
+          clanId: payload.clanId,
+        },
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        }
+      );
+
+      console.log('📦 Дані з сервера:', response.data);
+      return response.data; 
+    } catch (error: unknown) {
+      if (axios.isAxiosError(error)) {
+        return thunkAPI.rejectWithValue(error.response?.data?.message || 'Accept character error');
+      }
+      return thunkAPI.rejectWithValue('Accept character error');
+    }
+  }
+);
+
+export const notAcceptCharToClan = createAsyncThunk(
+  'clan/notAcceptChar',
+  async (payload: AcceptCharPayload, thunkAPI) => {
+     const state = thunkAPI.getState() as ReturnType<typeof store.getState>;
+    const token = state.auth.accessToken;
+  
+
+    try {
+      const response = await axios.delete(
+        `/party/clan/not-accept-char`, {
+        data: {
+          charId: payload.charId,
+          clanId: payload.clanId,
+        },
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+
+      } );
+
+      console.log('📦 Дані з сервера:', response.data);
+      return response.data; 
+    } catch (error: unknown) {
+      if (axios.isAxiosError(error)) {
+        return thunkAPI.rejectWithValue(error.response?.data?.message || 'Accept character error');
+      }
+      return thunkAPI.rejectWithValue('Accept character error');
+    }
+  }
+);

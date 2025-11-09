@@ -2,6 +2,7 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 import { RootState } from '../store';
+import { clearChars } from '../char/slice';
 
 
  
@@ -67,9 +68,13 @@ export const logout = createAsyncThunk('auth/logout', async (_, thunkAPI) => {
       },
     );
     clearAuthHeader();
+     thunkAPI.dispatch(clearChars());
+   
     return;
   } catch (error: unknown) {
     clearAuthHeader();
+     thunkAPI.dispatch(clearChars());
+    
     
       if (axios.isAxiosError(error)) {
         return thunkAPI.rejectWithValue(error.message || 'Logout error');

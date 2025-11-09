@@ -2,6 +2,7 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { createCharacter, deleteCharacter, getAllCharacters, getCharacter, getCharacterById, getFreeChars } from './operation';
 export interface Character {
   _id: string;
+  userId: string;
   server: string;
   nickname: string;
   race: string;
@@ -17,6 +18,7 @@ export interface Character {
 interface CharState {
   charData: {
     _id: string;
+    userId: string;
     server: string;
     nickname: string;
     race: string;
@@ -37,6 +39,7 @@ interface CharState {
 const initialState: CharState = {
   charData: {
     _id: '',
+    userId: "",
     server: '',
     nickname: '',
     race: '',
@@ -65,6 +68,12 @@ const charSlice = createSlice({
       const { id, level } = action.payload;
       const char = state.characters.find(c => c._id === id); // <-- тут characters, а не chars
       if (char) char.level = level;
+    },
+     removeFreeChar: (state, action) => {
+    state.freeChars = state.freeChars.filter(c => c._id !== action.payload);
+    },
+      clearChars: (state) => {
+      state.characters = [];
     },
   },
   extraReducers: builder => {
@@ -145,5 +154,5 @@ const charSlice = createSlice({
       });
   },
 });
-export const { updateCharacterLevel } = charSlice.actions;
+export const { updateCharacterLevel, removeFreeChar, clearChars } = charSlice.actions;
 export default charSlice.reducer;

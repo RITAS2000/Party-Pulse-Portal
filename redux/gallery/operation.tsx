@@ -38,7 +38,7 @@ export const fetchGallery = createAsyncThunk(
       const response = await axios.get("/party/gallery", {
         headers: { Authorization: `Bearer ${token}` },
       });
-        return response.data; 
+        return response.data
         
       } catch (error: unknown) {
       if (axios.isAxiosError(error)) {

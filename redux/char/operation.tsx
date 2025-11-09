@@ -117,7 +117,7 @@ export const getAllCharacters = createAsyncThunk<
       const response = await axios.get('/party/char', {
         headers: { Authorization: `Bearer ${token}` },
       });
-      return response.data; 
+      return response.data.result ; 
     } catch (error: unknown) {
       if (axios.isAxiosError(error)) {
         return thunkAPI.rejectWithValue(error.message || 'Get characters error');

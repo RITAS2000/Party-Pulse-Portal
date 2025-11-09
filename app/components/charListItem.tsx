@@ -53,7 +53,7 @@ export default function CharItem({ character }: CharacterCardProps) {
 
   return (
     <div
-      className="flex flex-col gap-2 items-center min-w-[230px] px-4 py-2 bg-blue-300 rounded-xl border border-solid shadow-[inset_0_0_6px_rgba(0,0,0,1)] hover:scale-100 hover:bg-green-300 transition-all duration-300 cursor-grab select-none"
+      className="flex flex-col gap-2 items-center min-w-[230px] px-4 py-2 bg-blue-300 rounded-xl border border-solid shadow-[inset_0_0_6px_rgba(0,0,0,1)]  cursor-grab select-none"
       onDragStart={e => e.stopPropagation()}
     >
       <h3 className="font-serif text-xl text-center text-gray-800">
@@ -138,7 +138,7 @@ export default function CharItem({ character }: CharacterCardProps) {
         <button
           type="button"
           onClick={() =>
-            dispatch(openModal({ type: 'deleteChar', data: {charId: character._id, role: character.clan.role } }))
+            dispatch(openModal({ type: 'deleteChar', data: {charId: character._id, clanId: character.clan.clanId, role: character.clan.role } }))
           }
           className="w-10 h-10 flex items-center justify-center rounded border-solid border border-black bg-red-700 shadow-[inset_0_0_6px_rgba(0,0,0,1)]"
         >

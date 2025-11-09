@@ -11,6 +11,7 @@ import { fetchGallery } from '@/redux/gallery/operation';
 
 export type CharacterType = {
   _id: string;
+  userId: string;
   server: string;
   nickname: string;
   race: string;

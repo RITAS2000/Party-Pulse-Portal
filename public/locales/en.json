@@ -14,6 +14,7 @@
     "clans": "Clans"
   },
   "page": {
+    "greeting": "Hello!",
     "addChar": "Add character",
     "addClan": "Add clan",
     "ul": {
@@ -30,6 +31,7 @@
     "galleryTitle": "Character Gallery",
     "galleryEmpty": "No characters have been added to the gallery yet",
     "clan": "The Page of the Clan",
+    
   "clansPage": {
     "create": "This is the clans page. Here you can create your own clan:",
     "note": "note that one character can be the leader of only one clan and only on their own server;",
@@ -39,7 +41,9 @@
     "clanInfoNotAdded": "Clan information has not been added yet.",
     "editInfo": "Edit clan information",
     "writeDescription": "Write a clan description",
-    "edit": "Edit"
+    "edit": "Edit",
+    "noPendingRequests": "No pending requests",
+   "pendingApproval": "Pending approval:"
   }
  
   },
@@ -126,7 +130,9 @@
     "clanJoinInfo": "To join the clan, select a character, click 'Join', and wait for the clan master's approval.",
   "joinBtn": "Join",
   "max2000": "Maximum 2000 characters",
-  "noFreeChars": "No free characters available"
+  "noFreeChars": "No free characters available",
+  "leaveTitle": "Remove from clan",
+    "leaveConfirm": "Are you sure you want to remove the character from the clan?"
 
   },
   "toast": {
@@ -154,7 +160,14 @@
     "deleteClanError": "Failed to delete clan.",
     "leaderDeleteError": "Transfer the leader role to another member before deleting this character.",
     "infoAdded": "Information added.",
-    "editError": "Error while editing."
+    "editError": "Error while editing.",
+    "leaveFirst": "Leave the clan first.",
+    "clanHasMultipleMembers": "There is more than one character in the clan.",
+    "charQueued": "Character has been sent to the waiting hall to join the clan.",
+    "characterAccepted": "Character accepted.",
+    "notAccepted": "Character request canceled.",
+   "charLeftClan": "Character has left the clan.",
+   "leaderActionRequired": "Transfer rights to another member or delete the clan if your character is the only one."
   },
 
   "characters": {
