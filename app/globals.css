@@ -18,7 +18,6 @@ ul {
   margin: 0;
   padding: 0;
   list-style: none;
-
 }
 
 textarea {
@@ -28,6 +27,7 @@ textarea {
 
 input {
   outline: none;
+  box-shadow: none;
 }
 
 button {
@@ -49,19 +49,71 @@ img {
 }
 
 body {
-
   min-height: 100vh;
   user-select: none;
   -webkit-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;
 }
-input[type=number]::-webkit-outer-spin-button,
-input[type=number]::-webkit-inner-spin-button {
+input[type='number']::-webkit-outer-spin-button,
+input[type='number']::-webkit-inner-spin-button {
   -webkit-appearance: none;
   margin: 0;
 }
+
 :focus-visible {
   outline: 0 !important;
   box-shadow: none !important;
+}
+.react-datepicker .react-datepicker__day--selected,
+.react-datepicker .react-datepicker__day--keyboard-selected {
+  background-color: #f52a2a !important;
+  color: white !important;
+  border-radius: 9999px !important;
+  transition: all 0.3s ease !important;
+}
+
+.react-datepicker .react-datepicker__day--today {
+  background-color: #1d4ed8 !important;
+  color: white !important;
+  border-radius: 9999px !important;
+  transition: all 0.3s ease !important;
+}
+
+.react-datepicker__day:hover,
+.react-datepicker__day:focus,
+.react-datepicker__day--selected:hover,
+.react-datepicker__day--selected:focus,
+.react-datepicker__day--keyboard-selected:hover,
+.react-datepicker__day--keyboard-selected:focus {
+  background-color: #d1d7eb !important;
+  color: white !important;
+  border-radius: 100% !important;
+  transition: all 0.3s ease !important;
+}
+.react-datepicker {
+  border: 2px solid #1d4ed8 !important;
+  border-radius: 8px !important;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease !important;
+  box-shadow: 0 2px 8px rgba(59, 130, 246, 0.2) !important;
+}
+.react-datepicker__header {
+  background-color: #eff6ff !important;
+  border-top-left-radius: 8px !important;
+  border-top-right-radius: 8px !important;
+  border-bottom-left-radius: 0 !important;
+  border-bottom-right-radius: 0 !important;
+  border-bottom: 2px solid #1d4ed8 !important;
+
+  transition: background-color 0.3s ease, border-color 0.3s ease !important;
+}
+.react-datepicker__day--outside-month {
+  color: #79aff0 !important;
+  transition: color 0.3s ease, opacity 0.3s ease !important;
+}
+.react-datepicker__day--selected.react-datepicker__day--outside-month,
+.react-datepicker__day--keyboard-selected.react-datepicker__day--outside-month {
+  background-color: transparent !important;
+  color: #9ca3af !important;
+  border-radius: 0 !important;
 }

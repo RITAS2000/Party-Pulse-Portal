@@ -31,6 +31,10 @@
     "galleryTitle": "Character Gallery",
     "galleryEmpty": "No characters have been added to the gallery yet",
     "clan": "The Page of the Clan",
+    "removeFromClan": "Remove from clan",
+    "appointOfficer": "Appoint officer",
+    "removeOfficer": "Remove officer",
+    "transferLeadership": "Transfer leadership",
     
   "clansPage": {
     "create": "This is the clans page. Here you can create your own clan:",
@@ -43,7 +47,11 @@
     "writeDescription": "Write a clan description",
     "edit": "Edit",
     "noPendingRequests": "No pending requests",
-   "pendingApproval": "Pending approval:"
+   "pendingApproval": "Pending approval:",
+   "composition": "Clan composition:",
+   "createGvg": "Add GvG",
+   "clanDeleteRestriction": "The clan can only be deleted by the clan leader if only one character – the leader – remains in the clan.",
+   "deleteClan": "Delete clan"
   }
  
   },
@@ -89,7 +97,7 @@
     "nickname": "Nickname",
     "race": "Race",
     "level": "Level",
-    "addBtn": "Submit",
+    "addBtn": "Add",
     "nicknameTooShort": "Nickname is too short",
     "nicknameTooLong": "Nickname is too long",
     "nicknameRequired": "Nickname is required",
@@ -132,7 +140,22 @@
   "max2000": "Maximum 2000 characters",
   "noFreeChars": "No free characters available",
   "leaveTitle": "Remove from clan",
-    "leaveConfirm": "Are you sure you want to remove the character from the clan?"
+    "leaveConfirm": "Are you sure you want to remove the character from the clan?",
+    "selectTerr": "Select territory",
+    "territory": "Territory",
+    "type": "Type",
+    "selectType": "Select type",
+    "date": "Date",
+    "time": "Time",
+    "enemy": "Enemy",
+    "territoryRequired": "Select territory",
+    "enemyTooShort": "Enemy name is too short",
+    "enemyTooLong": "Enemy name is too long",
+    "enemyRequired": "Enter enemy name",
+    "typeRequired": "Select type",
+    "dateRequired": "Select date",
+    "timeRequired": "Enter time",
+    "timeFormat": "Format HH:mm"
 
   },
   "toast": {
@@ -167,7 +190,12 @@
     "characterAccepted": "Character accepted.",
     "notAccepted": "Character request canceled.",
    "charLeftClan": "Character has left the clan.",
-   "leaderActionRequired": "Transfer rights to another member or delete the clan if your character is the only one."
+   "leaderActionRequired": "Transfer rights to another member or delete the clan if your character is the only one.",
+   "charAlreadyInClan": "A character who is already in a clan cannot create a new one.",
+    "transferLeadership": {
+      "error": "Leader cannot transfer leadership to themselves.",
+      "success": "Leadership transferred successfully!"
+    }
   },
 
   "characters": {
@@ -189,5 +217,57 @@
     "pink": "Pink",
     "teal": "Teal",
     "indigo": "Indigo"
+  },
+  
+  "territories": {
+    "1": "1-Frozen Lands",
+    "2": "2-Icy Path",
+    "3": "3-Avalanche Gorge",
+    "4": "4-Forest Ridge",
+    "5": "5-Ancient Path",
+    "6": "6-Doomed City",
+    "7": "7-City of Origins",
+    "8": "8-Great Wall",
+    "9": "9-Victory Plain",
+    "10": "10-City of Swords",
+    "11": "11-Fortress Compass",
+    "12": "12-Broken Mountain",
+    "13": "13-Fire Village",
+    "14": "14-Pepper Meadow",
+    "15": "15-Windy Plain",
+    "16": "16-Wind Village",
+    "17": "17-Emerald Forest",
+    "18": "18-Bright Mountains",
+    "19": "19-Dragon Lands",
+    "20": "20-Werewolf City",
+    "21": "21-Silk Mountains",
+    "22": "22-Port City",
+    "23": "23-Dragon City",
+    "24": "24-Stinky Slope",
+    "25": "25-Sunset Plateau",
+    "26": "26-Long Slope",
+    "27": "27-Sky Lake",
+    "28": "28-Orchid Valley",
+    "29": "29-Peach Dock",
+    "30": "30-Dried Sea",
+    "31": "31-Rio-shu River",
+    "32": "32-Swan Mountain",
+    "33": "33-Safe Path",
+    "34": "34-Sky Cliff",
+    "35": "35-Field of Bones",
+    "36": "36-Southern Mountains",
+    "37": "37-Feather City",
+    "38": "38-Yu-wan Tripod",
+    "39": "39-Soulless Swamp",
+    "40": "40-Misty Thicket",
+    "41": "41-White Mountains",
+    "42": "42-Black Mountains",
+    "43": "43-Dreamers' Mountains",
+    "44": "44-Dream Port"
+  },
+  "modes": {
+    "attack": "Attack",
+    "defense": "Defense"
   }
+
 }

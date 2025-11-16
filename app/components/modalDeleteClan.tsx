@@ -6,8 +6,10 @@ import { useDispatch, useSelector } from 'react-redux';
 import { ClockLoader } from 'react-spinners';
 import { toast } from 'react-toastify';
 import { useTranslation } from 'react-i18next';
-import { deleteClan, getClans } from '@/redux/clan/operation';
+import { deleteClan} from '@/redux/clan/operation';
 import { selectClansLoading } from '@/redux/clan/selectors';
+import { useRouter } from 'next/navigation';
+
 
 type ModalDeleteClanProps = {
   clanId: string;
@@ -18,6 +20,7 @@ export default function ModalDeleteClan({ clanId, clanChars }: ModalDeleteClanPr
   const isLoading = useSelector(selectClansLoading);
   const dispatch = useDispatch<AppDispatch>();
   const { t } = useTranslation();
+   const router = useRouter();
 
   const handleDelete = async () => {
    
@@ -29,8 +32,11 @@ export default function ModalDeleteClan({ clanId, clanChars }: ModalDeleteClanPr
     
     if (deleteClan.fulfilled.match(resultAction)) {
       toast.success(t("toast.deleteClan"));
-      dispatch(getClans()); 
+      
+       router.replace("/clan/create");
       dispatch(closeModal());
+      
+
     } else {
       toast.error(t("toast.deleteClanError"));
     }

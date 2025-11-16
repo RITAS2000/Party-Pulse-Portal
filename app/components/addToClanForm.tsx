@@ -1,7 +1,8 @@
 import { getAllCharacters, getFreeChars } from '@/redux/char/operation';
 import { selectFreeChars} from '@/redux/char/selectors';
-import { Character, removeFreeChar } from '@/redux/char/slice';import { addCharToClan } from '@/redux/clan/operation';
-;
+import { Character, removeFreeChar } from '@/redux/char/slice';
+import { addCharToClan } from '@/redux/clan/operation';
+
 import { Clan } from '@/redux/clan/slice';
 import { AppDispatch } from '@/redux/store';
 import {
@@ -64,7 +65,7 @@ if (!currentClan?._id) return;
 };
 
   return (
-    <div className='flex  w-[800px] py-12 px-12 gap-12 '>
+    <div className='flex  w-[1000px] py-12 px-12 gap-12 '>
       
       
       <p className="text-lg font-bold text-gray-700">{t("form.clanJoinInfo")}</p>

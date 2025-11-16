@@ -256,3 +256,100 @@ export const notAcceptCharToClan = createAsyncThunk(
     }
   }
 );
+
+
+export const addOfficer = createAsyncThunk(
+  'clan/addOfficer',
+  async (payload: AcceptCharPayload, thunkAPI) => {
+    const state = thunkAPI.getState() as ReturnType<typeof store.getState>;
+    const token = state.auth.accessToken;
+
+    try {
+      const response = await axios.patch(
+        `/party/clan/add-officer`,
+        {
+          charId: payload.charId,
+          clanId: payload.clanId,
+        },
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        }
+      );
+
+      console.log('📦 Дані з сервера:', response.data);
+      return response.data; 
+    } catch (error: unknown) {
+      if (axios.isAxiosError(error)) {
+        return thunkAPI.rejectWithValue(error.response?.data?.message || 'Add officer error');
+      }
+      return thunkAPI.rejectWithValue('Add officer error');
+    }
+  }
+);
+
+export const removeOfficer = createAsyncThunk(
+  "clan/removeOfficer",
+  async (payload: AcceptCharPayload, thunkAPI) => {
+    const state = thunkAPI.getState() as ReturnType<typeof store.getState>;
+    const token = state.auth.accessToken;
+
+    try {
+      const response = await axios.patch(
+        `/party/clan/remove-officer`,
+        {
+          charId: payload.charId,
+          clanId: payload.clanId,
+        },
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        }
+      );
+
+      return response.data;
+    } catch (error: unknown) {
+      if (axios.isAxiosError(error)) {
+        return thunkAPI.rejectWithValue(
+          error.response?.data?.message || "Remove officer error"
+        );
+      }
+      return thunkAPI.rejectWithValue("Remove officer error");
+    }
+  }
+);
+
+interface transferLeaderCharPayload {
+  newLeaderCharId: string;
+  clanId: string;
+}
+export const transferLeadership = createAsyncThunk(
+  "clan/transferLeadership",
+  async (payload: transferLeaderCharPayload, thunkAPI) => {
+    const state = thunkAPI.getState() as ReturnType<typeof store.getState>;
+    const token = state.auth.accessToken;
+
+    try {
+      const response = await axios.patch(
+        `/party/clan/transferLeadership`,
+        {
+          newLeaderCharId: payload.newLeaderCharId,
+          clanId: payload.clanId,
+        },
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        }
+      );
+
+      return response.data;
+    } catch (error: unknown) {
+      if (axios.isAxiosError(error)) {
+        return thunkAPI.rejectWithValue(
+          error.response?.data?.message || "Remove officer error"
+        );
+      }
+      return thunkAPI.rejectWithValue("Remove officer error");
+    }
+  }
+);
+
+
+

@@ -9,7 +9,7 @@ export default function UlTextClan() {
       <ul className="list-disc ml-6 mt2">
         <li className="text-lg text-gray-700">{t("page.clansPage.note")}</li>
         <li className="text-lg text-gray-700">{t("page.clansPage.info")}</li>
-        <li className="text-lg text-gray-700">{t("page.clansPage.delete")}</li>
+        {/* <li className="text-lg text-gray-700">{t("page.clansPage.delete")}</li> */}
              
           
               

@@ -111,7 +111,10 @@ if (clanAlreadyExists) {
   toast.error(t('toast.characterCannotBeLeaderOfTwoClans'));
   return;
 }
-
+    if (selectedChar.clan?.clanId) {
+  toast.info(t("toast.charAlreadyInClan"))
+  return;
+}
 
 if (selectedChar.server !== values.server) {
   toast.error(t('toast.characterWrongServer'));

@@ -21,7 +21,7 @@ export const addCharacterToGallery = createAsyncThunk(
       return response.data.data;
     } catch (error: unknown) {
       if (axios.isAxiosError(error)) {
-        return thunkAPI.rejectWithValue(error.message || 'Add');
+        return thunkAPI.rejectWithValue(error.message || 'Add erroe');
       }
       return thunkAPI.rejectWithValue('Add error');
     }

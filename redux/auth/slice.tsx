@@ -6,7 +6,7 @@ interface AuthState {
     userId: string,
     username: string,
     role?: string,
-    clanId?: string,
+    clansId?: string[],
     isAdmin?: boolean,
   };
   loading: boolean;

@@ -52,14 +52,14 @@ export default function AddToClanItem({ char, clanColor, clanId, leaderId }: Add
     };
     
     return (<div className=" flex items-center gap-3 pr-3 ml-4 ">
-        <div className={`flex flex-row items-center justify-between w-[224px] h-[48px] ${bgColorClass} rounded py-2 px-3 shadow-[inset_0_0_6px_rgba(0,0,0,1)]`}>
+        <div className={`flex flex-row items-center justify-between w-[224px] h-[40px] ${bgColorClass} rounded py-1 px-3 shadow-[inset_0_0_6px_rgba(0,0,0,1)]`}>
         <div className="flex items-center gap-3 ">
         <div className="w-8 h-8 rounded-full flex items-center justify-center bg-black shadow-[inset_0_0_6px_rgba(255,255,255,1)]">
         <Image src={`/iconHero/${char.race}.png`} alt={`${char.race}`} width={30} height={30} className="w-7 h-7 rounded-full"/></div>
             <p className="font-serif font-bold">{char.nickname}</p></div><p className="font-bold">{char.level}</p></div>
         <div className="flex gap-4">
-            {isLeader && <button type="button" onClick={() => handleAccept(char._id, clanId)} className="flex items-center justify-center w-6 h-6 bg-green-600 shadow-[inset_0_0_6px_rgba(0,0,0,1)]"><FaCheck color="white" /></button>}
-            {canRemove && <button type="button" className="flex items-center justify-center w-6 h-6 bg-red-600 shadow-[inset_0_0_6px_rgba(0,0,0,1)]"><IoClose onClick={() => { handleNoAccept(char._id, clanId) }} size={20} color="white" /></button>}</div>
+            {isLeader && <button type="button" onClick={() => handleAccept(char._id, clanId)} className="flex items-center justify-center w-6 h-6 bg-green-600 shadow-[inset_0_0_6px_rgba(0,0,0,1)] hover:bg-green-300 transition-all duration-300 "><FaCheck color="white" /></button>}
+            {canRemove && <button type="button" className="flex items-center justify-center w-6 h-6 bg-red-600 shadow-[inset_0_0_6px_rgba(0,0,0,1)] hover:bg-red-300 transition-all duration-300"><IoClose onClick={() => { handleNoAccept(char._id, clanId) }} size={20} color="white" /></button>}</div>
     </div>)
 
 }
